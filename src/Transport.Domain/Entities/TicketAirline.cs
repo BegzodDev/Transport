@@ -12,11 +12,11 @@ namespace Transport.Domain.Entities
         {
             PlaceAirlines = new HashSet<PlaceAirline>(); 
         }
-        public int Id { get; set; }
-        public DateTime dateTime { get; set; }
+        public int? Id { get; set; }
+        public DateTime? dateTime { get; set; }
+        public int? PassengerForAirlineId { get; set; }
 
-
-        public PassengerForAirline? passengerForAirline { get; set; }
+        public PassengerForAirline? PassengerForAirline { get; set; }
         public ICollection<PlaceAirline>? PlaceAirlines { get; set; }
     }
 }

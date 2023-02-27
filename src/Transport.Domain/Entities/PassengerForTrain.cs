@@ -12,5 +12,8 @@ namespace Transport.Domain.Entities.Traine_Entities
         public string? Pasport_Series { get; set; }
         public string? SHJR { get; set; }
 
+        public int? OrderTicketTrainId { get; set; }
+        public OrderTicketTrain? OrderTicketTrain { get; set; }
+        public TicketTrain? TicketTrains { get; set; }
     }
 }
