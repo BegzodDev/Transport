@@ -3,20 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Transport.Domain.Entities.Traine_Entities;
 
 namespace Transport.Domain.Entities
 {
-    public class TicketAirline
+    public class TicketTrain
     {
-        public TicketAirline()
+        public TicketTrain()
         {
-            PlaceAirlines = new HashSet<PlaceAirline>(); 
+            PlaceTrains = new HashSet<PlaceTrain>(); 
         }
         public int Id { get; set; }
         public DateTime dateTime { get; set; }
+        public int? PassergerForTrainId { get; set; }
 
-
-        public PassengerForAirline? passengerForAirline { get; set; }
-        public ICollection<PlaceAirline>? PlaceAirlines { get; set; }
+        public PassengerForTrain? PassergerForTrain { get; set; }
+        public ICollection<PlaceTrain>? PlaceTrains { get; set; }
     }
 }
