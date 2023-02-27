@@ -8,7 +8,7 @@ namespace Transport.Infrastructure.Persistence.EntityTypeConfigurations
     {
         public void Configure(EntityTypeBuilder<Admin> builder)
         {
-            builder.HasKey(x => x.Id);
+            builder.ToTable("Admin");
         }
 
     }
