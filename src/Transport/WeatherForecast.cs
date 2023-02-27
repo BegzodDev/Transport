@@ -1,4 +1,4 @@
-namespace Transport.Api
+namespace Transport
 {
     public class WeatherForecast
     {
