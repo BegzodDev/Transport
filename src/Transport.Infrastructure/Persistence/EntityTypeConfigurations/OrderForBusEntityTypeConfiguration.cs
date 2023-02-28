@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Security.Cryptography.X509Certificates;
 using Transport.Domain.Entities;
 
 namespace Transport.Infrastructure.Persistence.EntityTypeConfigurations
@@ -15,8 +14,8 @@ namespace Transport.Infrastructure.Persistence.EntityTypeConfigurations
                     .WithMany(x => x.OrderForBuses)
                     .HasForeignKey(x => x.UserId);
 
-                    
-                    
+
+
         }
     }
 }

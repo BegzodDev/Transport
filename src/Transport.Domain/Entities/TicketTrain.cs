@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Transport.Domain.Entities.Traine_Entities;
+﻿using Transport.Domain.Entities.Traine_Entities;
 
 namespace Transport.Domain.Entities
 {
@@ -11,7 +6,7 @@ namespace Transport.Domain.Entities
     {
         public TicketTrain()
         {
-            PlaceTrains = new HashSet<PlaceTrain>(); 
+            PlaceTrains = new HashSet<PlaceTrain>();
         }
         public int Id { get; set; }
         public DateTime dateTime { get; set; }

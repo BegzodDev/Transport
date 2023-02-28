@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Transport.Domain.Entities;
-using Transport.Domain.Enums;
+﻿using Transport.Domain.Enums;
 
 namespace Transport.Domain.Entities
 {

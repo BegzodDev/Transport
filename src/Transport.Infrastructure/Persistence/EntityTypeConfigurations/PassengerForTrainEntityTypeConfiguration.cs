@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Transport.Domain.Entities;
 using Transport.Domain.Entities.Traine_Entities;
 
 namespace Transport.Infrastructure.Persistence.EntityTypeConfigurations

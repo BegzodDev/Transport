@@ -21,4 +21,10 @@
     <ProjectReference Include="..\Transport.Domain\Transport.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DTOs\" />
+    <Folder Include="Notifications\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>

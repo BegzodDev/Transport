@@ -1,9 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Transport.Domain.Entities;
 using Transport.Domain.Entities.Traine_Entities;
 
@@ -19,9 +14,9 @@ namespace Transport.Application.Abstractions
         DbSet<OrderForTrain> ordersForTrains { get; set; }
         DbSet<OrderForBus> ordersForBuses { get; set; }
         DbSet<OrderTicketAirline> orderTicketAirlines { get; set; }
-        DbSet<OrderTicketTrain> orderTicketTrains { get; set;}
+        DbSet<OrderTicketTrain> orderTicketTrains { get; set; }
         DbSet<PassengerForAirline> passengerForAirlines { get; set; }
-        DbSet<PassengerForTrain> passengerForTrains { get;set; }
+        DbSet<PassengerForTrain> passengerForTrains { get; set; }
         DbSet<PlaceAirline> placeAirlines { get; set; }
         DbSet<PlaceTrain> placeTrains { get; set; }
         DbSet<TicketAirline> ticketAirlines { get; set; }
