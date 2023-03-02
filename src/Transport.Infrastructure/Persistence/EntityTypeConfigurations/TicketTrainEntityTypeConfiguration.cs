@@ -10,9 +10,9 @@ namespace Transport.Infrastructure.Persistence.EntityTypeConfigurations
         {
             builder.HasKey(x => x.Id);
 
-            builder.HasOne(x => x.PassergerForTrain)
-                .WithOne(x => x.TicketTrains)
-                .HasForeignKey<TicketTrain>(x => x.PassergerForTrainId);
+            builder.HasOne(x => x.PlaceTrains)
+                .WithOne(x => x.TicketTrain)
+                .HasForeignKey<TicketTrain>(x => x.PlaceTrainId);
         }
     }
 }

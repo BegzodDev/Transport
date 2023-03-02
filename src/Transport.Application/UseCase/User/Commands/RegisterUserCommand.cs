@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using Transport.Application.Abstractions;
 using Transport.Application.Exceptions;
 
-namespace Transport.Application.UseCase.User
+namespace Transport.Application.UseCase.User.Commands
 {
     public class RegisterUserCommand : ICommand<Unit>
     {
@@ -17,7 +17,7 @@ namespace Transport.Application.UseCase.User
         public string Email { get; set; } = string.Empty;
     }
 
-    public class RegisterUserCommandHandler : ICommandHandler<RegisterUserCommand, Unit>
+    /*public class RegisterUserCommandHandler : ICommandHandler<RegisterUserCommand, Unit>
     {
         private readonly IApplicationDbContext _dbContext;
         private readonly IHashService _hashService;
@@ -48,5 +48,5 @@ namespace Transport.Application.UseCase.User
         }
 
 
-    }
+    }*/
 }
