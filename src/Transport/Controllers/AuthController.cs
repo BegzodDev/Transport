@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Transport.Application.UseCase.Auth.Commands;
-using Transport.Application.UseCase.User;
+using Transport.Application.UseCase.User.Commadns;
 
 namespace Transport.Api.Controllers
 {
