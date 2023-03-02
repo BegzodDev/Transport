@@ -9,7 +9,6 @@ namespace Transport.Domain.Entities
         public Status Status { get; set; }
 
         public int? TrainId { get; set; }
-        public int? TicketTrainId { get; set; }
 
         public TicketTrain? TicketTrain { get; set; }
         public Train? Train { get; set; }

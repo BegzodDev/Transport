@@ -13,7 +13,7 @@ namespace Transport.Application.UseCase.Auth.Commands
         public string Password { get; set; } = string.Empty;
     }
 
-    public class LoginComandHandler : IRequestHandler<LoginCommand, string>
+    /*public class LoginComandHandler : IRequestHandler<LoginCommand, string>
     {
         private readonly IApplicationDbContext _applicationDbContext;
         private readonly IHashService _hashService;
@@ -24,9 +24,9 @@ namespace Transport.Application.UseCase.Auth.Commands
             _applicationDbContext = applicationDbContext;
             _hashService = hashService;
             _tokenService = tokenService;
-        }
+        }*/
 
-        public async Task<string> Handle(LoginCommand request, CancellationToken cancellationToken)
+       /* public async Task<string> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
             var user = await _applicationDbContext.users.FirstOrDefaultAsync(x => x.UserName == request.UserName, cancellationToken);
 
@@ -59,6 +59,6 @@ namespace Transport.Application.UseCase.Auth.Commands
             return _tokenService.GetAccessToken(claims.ToArray());
 
         }
-    }
+    }*/
 
 }

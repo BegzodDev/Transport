@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Transport.Domain.Entities;
-using Transport.Domain.Entities.Traine_Entities;
 
 namespace Transport.Application.Abstractions
 {
@@ -10,18 +9,12 @@ namespace Transport.Application.Abstractions
         DbSet<User> users { get; set; }
         DbSet<Airline> airlines { get; set; }
         DbSet<Bus> bus { get; set; }
-        DbSet<OrderForAirline> ordersForAirlines { get; set; }
-        DbSet<OrderForTrain> ordersForTrains { get; set; }
-        DbSet<OrderForBus> ordersForBuses { get; set; }
-        DbSet<OrderTicketAirline> orderTicketAirlines { get; set; }
-        DbSet<OrderTicketTrain> orderTicketTrains { get; set; }
-        DbSet<PassengerForAirline> passengerForAirlines { get; set; }
-        DbSet<PassengerForTrain> passengerForTrains { get; set; }
+        DbSet<Train> trains { get; set; }
         DbSet<PlaceAirline> placeAirlines { get; set; }
         DbSet<PlaceTrain> placeTrains { get; set; }
         DbSet<TicketAirline> ticketAirlines { get; set; }
         DbSet<TicketTrain> ticketTrains { get; set; }
-        DbSet<Train> trains { get; set; }
+        DbSet<TicketBus> ticketBuses { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }

@@ -10,9 +10,9 @@ namespace Transport.Infrastructure.Persistence.EntityTypeConfigurations
         {
             builder.HasKey(x => x.Id);
 
-            builder.HasOne(x => x.OrderForBus)
-                .WithMany(x => x.Buses)
-                .HasForeignKey(x => x.OrderForBusId);
+            builder.HasMany(x => x.TicketBuses)
+                .WithOne(x => x.Bus)
+                .HasForeignKey(x => x.BusId);
         }
     }
 }
