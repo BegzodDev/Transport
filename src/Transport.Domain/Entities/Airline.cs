@@ -6,7 +6,7 @@
         {
             PlaceAirlines = new HashSet<PlaceAirline>();
         }
-        public int? Id { get; set; }
+        public int Id { get; set; }
         public string? Flight_From { get; set; }
         public string? Flight_For { get; set; }
         public double? Price { get; set; }

@@ -2,12 +2,16 @@
 {
     public class Bus
     {
+
         public Bus()
         {
             TicketBuses = new HashSet<TicketBus>();
         }
 
         public int? Id { get; set; }
+
+        public int Id { get; set; }
+
         public string? From { get; set; }
         public string? For { get; set; }
         public double? Price { get; set; }

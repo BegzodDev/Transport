@@ -10,8 +10,6 @@ namespace Transport.Infrastructure.Persistence
             : base(options)
         {
         }
-
-
         public DbSet<Admin> admins { get; set; }
         public DbSet<User> users { get; set; }
         public DbSet<Airline> airlines { get; set; }
@@ -21,6 +19,7 @@ namespace Transport.Infrastructure.Persistence
         public DbSet<TicketAirline> ticketAirlines { get; set; }
         public DbSet<TicketTrain> ticketTrains { get; set; }
         public DbSet<Train> trains { get; set; }
+
         public DbSet<TicketBus> ticketBuses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -8,8 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="AWSSDK.Core" Version="3.7.105.9" />
+
     <PackageReference Include="MediatR" Version="11.1.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting.Abstractions" Version="2.2.0" />
+
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.3" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="7.0.0" />
@@ -22,6 +27,7 @@
   <ItemGroup>
     <Folder Include="Notifications\" />
     <Folder Include="Services\" />
+    <Folder Include="UseCase\Admin\Queries\" />
   </ItemGroup>
 
 </Project>
