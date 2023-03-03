@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Transport.Application.Abstractions
 {
-    internal interface ISecurityService
+    public interface ISecurityService
     {
+        public bool CheckSecure(string pasport);
     }
 }
