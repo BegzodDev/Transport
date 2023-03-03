@@ -4,7 +4,7 @@ namespace Transport.Application.Exceptions
 {
     public class TrainNotFoundException : Exception
     {
-        public BusNotFoundException()
+        public TrainNotFoundException()
            : base(nameof(Bus)) { }
     }
 }

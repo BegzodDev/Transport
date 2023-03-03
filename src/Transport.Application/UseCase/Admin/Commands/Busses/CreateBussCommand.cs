@@ -10,7 +10,6 @@ namespace Transport.Application.UseCase.Admin.Commands.Busses
         public double? Price { get; set; }
         public int? OrderForBusId { get; set; }
 
-        public OrderForBus? OrderForBus { get; set; }
     }
     public class CreateBussCommandHandler : ICommandHandler<CreateBussCommand, int>
     {

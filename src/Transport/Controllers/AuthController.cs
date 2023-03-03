@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Transport.Application.UseCase.Auth.Commands;
-using Transport.Application.UseCase.User.Commands;
 using Transport.Application.UseCase.User.Commadns;
 
 namespace Transport.Api.Controllers
@@ -21,14 +20,6 @@ namespace Transport.Api.Controllers
 
             return Ok(token);
         }
-
-        //[HttpPost("Customer/Register")]
-        //public async Task<IActionResult> RegisterAsCustomer(CustomerRegisterCommand command)
-        //{
-        //    await _mediator.Send(command);
-
-        //    return Ok();
-        //}
 
         [HttpPost("UserRegister")]
         public async Task<IActionResult> RegisterAsUser([FromForm] RegisterUserCommand command)
