@@ -9,11 +9,8 @@ namespace Transport.Application.UseCase.User.Commadns
     public class RegisterUserCommand : ICommand<Unit>
     {
         [Required]
-        public string? UserName { get; set; }
-
-        [Required]
-        public string? Password { get; set; }
-
+        public string? Pasport_Series { get; set; }
+        public string? SHJR { get; set; }
         public string Email { get; set; } = string.Empty;
     }
 
@@ -30,15 +27,15 @@ namespace Transport.Application.UseCase.User.Commadns
 
         public async Task<Unit> Handle(RegisterUserCommand command, CancellationToken cancellationToken)
         {
-            if (await _dbContext.users.AnyAsync(x => x.UserName == command.UserName, cancellationToken))
+            if (await _dbContext.users.AnyAsync(x => x.Pasport_Series == command.Pasport_Series, cancellationToken))
             {
                 throw new RegisterException(new UserException(nameof(User)));
             }
 
             var user = new Domain.Entities.User()
             {
-                UserName = command.UserName,
-                PasswordHash = _hashService.GetHash(command.Password!),
+                Pasport_Series = command.Pasport_Series,
+                SHJR = _hashService.GetHash(command.SHJR!),
             };
 
             _dbContext.users.Add(user);
