@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using Transport.Application.Abstractions;
 using Transport.Application.Exceptions;
 
-namespace Transport.Application.UseCase.User.Commadns
+namespace Transport.Application.UseCase.User.Commands
 {
     public class RegisterUserCommand : ICommand<Unit>
     {

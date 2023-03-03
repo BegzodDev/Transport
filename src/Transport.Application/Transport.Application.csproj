@@ -24,10 +24,5 @@
     <ProjectReference Include="..\Transport.Domain\Transport.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Notifications\" />
-    <Folder Include="Services\" />
-    <Folder Include="UseCase\Admin\Queries\" />
-  </ItemGroup>
 
 </Project>
