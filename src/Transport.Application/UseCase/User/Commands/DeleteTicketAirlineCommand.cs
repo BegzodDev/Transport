@@ -11,33 +11,32 @@ using Transport.Application.Exceptions;
 
 namespace Transport.Application.UseCase.User.Commands
 {
-    public class UpdateTicketAirlineCommand : ICommand<Unit>
+    public class DeleteTicketAirlineCommand : ICommand<Unit>
     {
         public int Id { get; set; }
-        public DateTime Date { get; set; }
     }
-    public class UpdateTicketAirlineCommandHandler : ICommandHandler<UpdateTicketAirlineCommand, Unit>
+    public class DeleteTicketAirlineCommandHandler : ICommandHandler<DeleteTicketAirlineCommand, Unit>
     {
         private readonly IApplicationDbContext _context;
-
-        public UpdateTicketAirlineCommandHandler(IApplicationDbContext context)
+        public DeleteTicketAirlineCommandHandler(IApplicationDbContext context)
         {
             _context = context;
         }
 
-        public async Task<Unit> Handle(UpdateTicketAirlineCommand command, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(DeleteTicketAirlineCommand commamd, CancellationToken cancellationToken)
         {
-            var ticket = await _context.ticketAirlines.FirstOrDefaultAsync(x => x.Id == command.Id,cancellationToken);
+            var ticket = await _context.ticketAirlines.FirstOrDefaultAsync(x=>x.Id== commamd.Id);
 
-            if (ticket == null)
+            if (ticket==null)
             {
                 throw new AirlineNotFoundException();
             }
 
-            ticket.dateTime = command.Date;
+            _context.ticketAirlines.Remove(ticket);
             await _context.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;
+            return Unit.Value;   
         }
     }
+
 }
