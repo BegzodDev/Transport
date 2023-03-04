@@ -4,6 +4,7 @@ using Microsoft.Extensions.Caching.Distributed;
 using System.Text.Json;
 using Transport.Application.Abstractions;
 using Transport.Application.DTOs;
+using Transport.Application.Exceptions;
 using Transport.Domain.Entities;
 using Transport.Domain.Enums;
 
@@ -57,7 +58,7 @@ namespace Transport.Application.UseCase.User.Commands
             
             if (reys == null)
             {
-                throw new Exception("Can not foun this Reys");
+                throw new AirlineNotFoundException();
             }
             if (command.Status == Status.Econom)
             {
