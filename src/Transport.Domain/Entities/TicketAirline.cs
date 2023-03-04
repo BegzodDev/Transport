@@ -5,10 +5,11 @@
 
         public int? Id { get; set; }
         public DateTime? dateTime { get; set; }
-
-
+        public string? From { get; set; }
+        public string? For { get; set; }
         public int? UserId { get; set; }
         public User? User { get; set; }
+
         public int? PlaceAirlineId { get; set; }
         public PlaceAirline? PlaceAirline { get; set; }
     }

@@ -9,13 +9,13 @@ using Transport.Domain.Enums;
 
 namespace Transport.Application.UseCase.User.Commands
 {
-    public class CreateAirlineTickerCommand : ICommand<Unit>, TicketAirlineViewModel
+    public class CreateAirlineTickerCommand : ICommand<Unit>
     {
         public string? PasportSeies { get; set; }
         public DateTime? Date { get; set; }
-        public string From { get; set; }
-        public string For { get; set; }
-        public int Place { get; set; }
+        public string? From { get; set; }
+        public string? For { get; set; }
+        public int? Place { get; set; }
         public Status Status { get; set; }
     }
     public class CreateAirlineTickerCommandHandler : ICommandHandler<CreateAirlineTickerCommand, Unit>
@@ -98,10 +98,11 @@ namespace Transport.Application.UseCase.User.Commands
                 Place_in_Ticket = command.Place,
                 AirlineId = reys.Id
             };
-
+            
             var user = _context.users.FirstOrDefault(x => x.Pasport_Series == command.PasportSeies);
 
-            List<TicketAirline> tickets = new List<TicketAirline>();
+            
+            var tickets = new TicketAirline();
 
             if (!_economyService.PaymentCheck(command.PasportSeies,(double)reys.Price))
             {
@@ -111,13 +112,15 @@ namespace Transport.Application.UseCase.User.Commands
             {
                 if (_economyService.PaymentCheck(command.PasportSeies, (double)reys.Price))
                 {
-
-                    tickets.Add(new TicketAirline()
+                    tickets= new TicketAirline()
                     {
-                        UserId = user.Id,
-                        dateTime = reys.Date,
-                        PlaceAirlineId = place.Id
-                    });
+                        UserId = reys.Id,
+                        PlaceAirlineId = place.Id,
+                        From = reys.Flight_From,
+                        For = reys.Flight_For,
+                        dateTime = reys.Date
+                    };
+                    
                 }
                 else { throw new Exception("Invalid pasport or not enoughmoney"); }
             }
@@ -125,12 +128,14 @@ namespace Transport.Application.UseCase.User.Commands
             {
                 if (_economyService.PaymentCheck(command.PasportSeies, ((double)reys.Price)*1.5))
                 {
-                    tickets.Add(new TicketAirline()
+                    tickets = new TicketAirline()
                     {
-                        UserId = user.Id,
+                        UserId = reys.Id,
+                        PlaceAirlineId = place.Id,
+                        From = reys.Flight_From,
+                        For = reys.Flight_For,
                         dateTime = reys.Date,
-                        PlaceAirlineId = place.Id
-                    });
+                    };
                 }
                 else { throw new Exception("Invalid pasport or not enoughmoney"); }
 
@@ -140,24 +145,20 @@ namespace Transport.Application.UseCase.User.Commands
                 if (_economyService.PaymentCheck(command.PasportSeies, ((double)reys.Price)*2.5))
                 {
 
-                    tickets.Add(new TicketAirline()
+                    tickets = new TicketAirline()
                     {
-                        UserId = user.Id,
+                        UserId = reys.Id,
+                        PlaceAirlineId = place.Id,
+                        From = reys.Flight_From,
+                        For = reys.Flight_For,
                         dateTime = reys.Date,
-                        PlaceAirlineId = place.Id
-                    });
+                    };
                 }
                 else { throw new Exception("Invalid pasport or not enoughmoney"); }
             }
 
-            var jsonTickets = JsonSerializer.Serialize(tickets);
-
-            await _distrubuteCache.SetStringAsync(_currentUserService.UserId.ToString(), jsonTickets, new DistributedCacheEntryOptions
-            {
-                AbsoluteExpirationRelativeToNow = TimeSpan.FromDays(1)
-
-            },cancellationToken); ;
-
+            await _context.ticketAirlines.AddAsync(tickets);
+            await _context.SaveChangesAsync(cancellationToken);
             return Unit.Value;
         }
     }
