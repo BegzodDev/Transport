@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Transport.Application.Abstractions;
 using Transport.Application.DTOs;
+using Transport.Application.Exceptions;
 
 namespace Transport.Application.UseCase.User.Queries
 {
@@ -25,7 +26,7 @@ namespace Transport.Application.UseCase.User.Queries
 
             if (ticket == null)
             {
-                throw new Exception("Ticket Not Found");
+                throw new AirlineNotFoundException();
             }
 
             return (TicketAirlineViewModel)ticket;
