@@ -18,10 +18,17 @@ namespace Transport.Infrastructure
         {
             services.AddDbContext<IApplicationDbContext, ApplicationDbContext>(options =>
             options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
-
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = "localhost";
+                options.InstanceName = "local";
+            });
             services.AddSingleton<IHashService, HashService>();
             services.AddScoped<ITokenService, JWTService>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
+            services.AddScoped<IGovermentService, GovermentService>();
+            services.AddScoped<IEconomyService, EconomyService>();
+            services.AddScoped<ISecurityService, SecureService>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                .AddJwtBearer(options =>
