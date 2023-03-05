@@ -1,11 +1,5 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using Transport.Application.Abstractions;
 using Transport.Application.Exceptions;
 
@@ -27,7 +21,7 @@ namespace Transport.Application.UseCase.User.Commands
 
         public async Task<Unit> Handle(UpdateTicketAirlineCommand command, CancellationToken cancellationToken)
         {
-            var ticket = await _context.ticketAirlines.FirstOrDefaultAsync(x => x.Id == command.Id,cancellationToken);
+            var ticket = await _context.ticketAirlines.FirstOrDefaultAsync(x => x.Id == command.Id, cancellationToken);
 
             if (ticket == null)
             {

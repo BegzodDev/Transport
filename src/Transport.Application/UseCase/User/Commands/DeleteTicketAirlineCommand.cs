@@ -1,11 +1,5 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using Transport.Application.Abstractions;
 using Transport.Application.Exceptions;
 
@@ -25,9 +19,9 @@ namespace Transport.Application.UseCase.User.Commands
 
         public async Task<Unit> Handle(DeleteTicketAirlineCommand commamd, CancellationToken cancellationToken)
         {
-            var ticket = await _context.ticketAirlines.FirstOrDefaultAsync(x=>x.Id== commamd.Id);
+            var ticket = await _context.ticketAirlines.FirstOrDefaultAsync(x => x.Id == commamd.Id);
 
-            if (ticket==null)
+            if (ticket == null)
             {
                 throw new AirlineNotFoundException();
             }
@@ -35,7 +29,7 @@ namespace Transport.Application.UseCase.User.Commands
             _context.ticketAirlines.Remove(ticket);
             await _context.SaveChangesAsync(cancellationToken);
 
-            return Unit.Value;   
+            return Unit.Value;
         }
     }
 
