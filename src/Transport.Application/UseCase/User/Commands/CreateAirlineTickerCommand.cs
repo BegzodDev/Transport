@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
 using Transport.Application.Abstractions;
 using Transport.Application.DTOs;
@@ -12,11 +13,17 @@ namespace Transport.Application.UseCase.User.Commands
 {
     public class CreateAirlineTickerCommand : ICommand<Unit>
     {
+        [Required]
         public string? PasportSeies { get; set; }
-        public DateTime? Date { get; set; }
+        [Required]
+        public DateOnly? Date { get; set; }
+        [Required]
         public string? From { get; set; }
+        [Required]
         public string? For { get; set; }
+        [Required]
         public int? Place { get; set; }
+        [Required]
         public Status Status { get; set; }
     }
     public class CreateAirlineTickerCommandHandler : ICommandHandler<CreateAirlineTickerCommand, Unit>
@@ -119,7 +126,8 @@ namespace Transport.Application.UseCase.User.Commands
                         PlaceAirlineId = place.Id,
                         From = reys.Flight_From,
                         For = reys.Flight_For,
-                        dateTime = reys.Date
+                        dateTime = reys.Date,
+                        PasportSeries= command.PasportSeies,
                     };
                     
                 }
@@ -136,6 +144,8 @@ namespace Transport.Application.UseCase.User.Commands
                         From = reys.Flight_From,
                         For = reys.Flight_For,
                         dateTime = reys.Date,
+                        PasportSeries = command.PasportSeies
+
                     };
                 }
                 else { throw new Exception("Invalid pasport or not enoughmoney"); }
@@ -153,6 +163,8 @@ namespace Transport.Application.UseCase.User.Commands
                         From = reys.Flight_From,
                         For = reys.Flight_For,
                         dateTime = reys.Date,
+                        PasportSeries = command.PasportSeies
+
                     };
                 }
                 else { throw new Exception("Invalid pasport or not enoughmoney"); }

@@ -1,6 +1,4 @@
-﻿
-
-using MediatR;
+﻿using MediatR;
 
 namespace Transport.Application.Abstractions
 {
