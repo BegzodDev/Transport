@@ -54,13 +54,13 @@ namespace Transport.Application.UseCase.User.Commands
 
         public async Task<Unit> Handle(CreateAirlineTickerCommand command,CancellationToken cancellationToken)
         {
-            if (!_govermentService.Check(command.PasportSeies))
+            if (!_govermentService.Check(command.PasportSeies!))
             {
                 throw new Exception("Pasport series is Don't have in our Base");
             }
-            _securityService.CheckSecure(command.PasportSeies);
-            var reys = _context.airlines.FirstOrDefault(x => x.Flight_From.ToLower() == command.From.ToLower() && 
-                                                        x.Flight_For.ToLower() == command.For.ToLower() &&
+            _securityService.CheckSecure(command.PasportSeies!);
+            var reys = _context.airlines.FirstOrDefault(x => x.Flight_From!.ToLower() == command.From!.ToLower() && 
+                                                        x.Flight_For!.ToLower() == command.For!.ToLower() &&
                                                         x.Date == command.Date);
             
             if (reys == null)
@@ -107,18 +107,18 @@ namespace Transport.Application.UseCase.User.Commands
                 AirlineId = reys.Id
             };
             
-            var user = _context.users.FirstOrDefault(x => x.Pasport_Series == command.PasportSeies);
+            var user = _context.users.FirstOrDefault(x => x.UserName == command.From);
 
             
             var tickets = new TicketAirline();
 
-            if (!_economyService.PaymentCheck(command.PasportSeies,(double)reys.Price))
+            if (!_economyService.PaymentCheck(command.PasportSeies!,(double)reys.Price!))
             {
                 throw new Exception("Payment is valid");
             }
             else if (command.Status == Status.Econom)
             {
-                if (_economyService.PaymentCheck(command.PasportSeies, (double)reys.Price))
+                if (_economyService.PaymentCheck(command.PasportSeies!, (double)reys.Price))
                 {
                     tickets= new TicketAirline()
                     {
@@ -135,7 +135,7 @@ namespace Transport.Application.UseCase.User.Commands
             }
             else if (command.Status == Status.Buiseness)
             {
-                if (_economyService.PaymentCheck(command.PasportSeies, ((double)reys.Price)*1.5))
+                if (_economyService.PaymentCheck(command.PasportSeies!, ((double)reys.Price)*1.5))
                 {
                     tickets = new TicketAirline()
                     {
@@ -153,7 +153,7 @@ namespace Transport.Application.UseCase.User.Commands
             }
             else if (command.Status == Status.VIP)
             {
-                if (_economyService.PaymentCheck(command.PasportSeies, ((double)reys.Price)*2.5))
+                if (_economyService.PaymentCheck(command.PasportSeies!, ((double)reys.Price)*2.5))
                 {
 
                     tickets = new TicketAirline()

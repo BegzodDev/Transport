@@ -5,6 +5,8 @@ using Transport.Application.UseCase.User.Commands;
 
 namespace Transport.Api.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class AuthController : Controller
     {
         private readonly IMediator _mediator;
