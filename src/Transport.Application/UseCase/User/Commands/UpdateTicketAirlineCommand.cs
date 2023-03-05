@@ -8,7 +8,7 @@ namespace Transport.Application.UseCase.User.Commands
     public class UpdateTicketAirlineCommand : ICommand<Unit>
     {
         public int Id { get; set; }
-        public DateOnly Date { get; set; }
+        public DateTime Date { get; set; }
     }
     public class UpdateTicketAirlineCommandHandler : ICommandHandler<UpdateTicketAirlineCommand, Unit>
     {

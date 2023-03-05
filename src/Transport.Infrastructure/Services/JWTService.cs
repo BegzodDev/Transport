@@ -5,6 +5,8 @@ using System.Security.Claims;
 using System.Text;
 using Transport.Application.Abstractions;
 using Transport.Infrastructure.Configurations;
+using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames;
+
 
 namespace Transport.Infrastructure.Services
 {

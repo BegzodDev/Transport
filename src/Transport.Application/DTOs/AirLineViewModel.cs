@@ -1,12 +1,7 @@
-﻿namespace Transport.Domain.Entities
+﻿namespace Transport.Application.DTOs
 {
-    public class Airline
+    public class AirLineViewModel
     {
-        public Airline()
-        {
-            PlaceAirlines = new HashSet<PlaceAirline>();
-        }
-        public int Id { get; set; }
         public string? Flight_From { get; set; }
         public string? Flight_For { get; set; }
         public double? Price { get; set; }
@@ -15,6 +10,5 @@
         public int? Count_Econom_Class_Place { get; set; }
         public int? Count_VIP_Class_Place { get; set; }
 
-        public ICollection<PlaceAirline>? PlaceAirlines { get; set; }
     }
 }
