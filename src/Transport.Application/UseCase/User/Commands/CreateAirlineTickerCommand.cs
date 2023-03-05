@@ -10,7 +10,7 @@ namespace Transport.Application.UseCase.User.Commands
     public class CreateAirlineTickerCommand : ICommand<Unit>
     {
         public string? PasportSeies { get; set; }
-        public DateTime? Date { get; set; }
+        public DateOnly? Date { get; set; }
         public string? From { get; set; }
         public string? For { get; set; }
         public int? Place { get; set; }
