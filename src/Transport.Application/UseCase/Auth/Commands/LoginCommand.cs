@@ -9,8 +9,8 @@ namespace Transport.Application.UseCase.Auth.Commands
 {
     public class LoginCommand : IRequest<string>
     {
-        public string? Pasport_Series { get; set; }
-        public string? SHJR { get; set; }
+        public string? UserName { get; set; }
+        public string? Password { get; set; }
     }
 
     public class LoginComandHandler : IRequestHandler<LoginCommand, string>
@@ -28,13 +28,13 @@ namespace Transport.Application.UseCase.Auth.Commands
 
         public async Task<string> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
-            var user = await _applicationDbContext.users.FirstOrDefaultAsync(x => x.Pasport_Series == request.Pasport_Series, cancellationToken);
+            var user = await _applicationDbContext.users.FirstOrDefaultAsync(x => x.UserName == request.UserName, cancellationToken);
 
             if (user == null)
             {
                 throw new LoginException(new EntityNotFoundException(nameof(User)));
             }
-            if (user.Pasport_Series != _hashService.GetHash(request.SHJR!))
+            if (user.PasswordHash != _hashService.GetHash(request.Password!))
             {
                 throw new LoginException();
             }
@@ -42,13 +42,13 @@ namespace Transport.Application.UseCase.Auth.Commands
             var claims = new List<Claim>
             {
                 new (ClaimTypes.NameIdentifier, user.Id.ToString()!),
-                new (ClaimTypes.Name, user.Pasport_Series!),
+                new (ClaimTypes.Name, user.UserName)
             };
 
             if (await _applicationDbContext.admins.AnyAsync(x => x.Id == user.Id, cancellationToken))
             {
                 claims.Add(new Claim(ClaimTypes.Role, nameof(Domain.Entities.Admin)));
-                claims.Add(new Claim(ClaimTypes.Role, nameof(Domain.Entities.User)));
+                //claims.Add(new Claim(ClaimTypes.Role, nameof(Domain.Entities.User)));
             }
 
             if (await _applicationDbContext.users.AnyAsync(x => x.Id == user.Id, cancellationToken))

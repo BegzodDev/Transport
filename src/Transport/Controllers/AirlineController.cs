@@ -51,27 +51,27 @@ namespace Transport.Api.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost("Rais")]
         [Authorize(Policy = "AdminActions")]
-        public async Task<IActionResult> Create(CreateAirlineCommand command)
+        public async Task<IActionResult> Create(/*[FromForm]*/ CreateAirlineCommand command)
         {
             var response = await _mediator.Send(command);
 
             return Ok(response);
         }
 
-        [HttpPut]
+        [HttpPut("Rais")]
         [Authorize(Policy = "AdminActions")]
-        public async Task<IActionResult> Update(UpdateAirlineCommand command)
+        public async Task<IActionResult> Update([FromForm] UpdateAirlineCommand command)
         {
             await _mediator.Send(command);
             return Ok();
         }
 
 
-        [HttpDelete]
+        [HttpDelete("Rais")]
         [Authorize(Policy = "AdminActions")]
-        public async Task<IActionResult> Delete(DeleteAirlineCommand command)
+        public async Task<IActionResult> Delete([FromForm] DeleteAirlineCommand command)
         {
             await _mediator.Send(command);
             return Ok();
