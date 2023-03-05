@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Transport.Application.UseCase.Admin.Commands.Airlines;
 using Transport.Application.UseCase.User.Commands;
 using Transport.Application.UseCase.User.Queries;
 
@@ -48,5 +49,33 @@ namespace Transport.Api.Controllers
             var response = await _mediator.Send(query);
             return Ok(response);
         }
+
+
+        [HttpPost]
+        [Authorize(Policy = "AdminActions")]
+        public async Task<IActionResult> Create(CreateAirlineCommand command)
+        {
+            var response = await _mediator.Send(command);
+
+            return Ok(response);
+        }
+
+        [HttpPut]
+        [Authorize(Policy = "AdminActions")]
+        public async Task<IActionResult> Update(UpdateAirlineCommand command)
+        {
+            await _mediator.Send(command);
+            return Ok();
+        }
+
+
+        [HttpDelete]
+        [Authorize(Policy = "AdminActions")]
+        public async Task<IActionResult> Delete(DeleteAirlineCommand command)
+        {
+            await _mediator.Send(command);
+            return Ok();
+        }
+
     }
 }
