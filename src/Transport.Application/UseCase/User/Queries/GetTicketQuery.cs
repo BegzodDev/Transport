@@ -1,5 +1,4 @@
-﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Transport.Application.Abstractions;
 using Transport.Application.DTOs;
 using Transport.Application.Exceptions;
@@ -20,9 +19,9 @@ namespace Transport.Application.UseCase.User.Queries
             _context = context;
         }
 
-        public async Task<TicketAirlineViewModel> Handle(GetTicketQuery query,CancellationToken cancellationToken)
+        public async Task<TicketAirlineViewModel> Handle(GetTicketQuery query, CancellationToken cancellationToken)
         {
-            var ticket = await _context.ticketAirlines.FirstOrDefaultAsync(x=>x.UserId == query.UserId);
+            var ticket = await _context.ticketAirlines.FirstOrDefaultAsync(x => x.UserId == query.UserId);
 
             if (ticket == null)
             {
