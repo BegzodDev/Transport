@@ -2,7 +2,7 @@
 using Transport.Application.Abstractions;
 using Transport.Domain.Entities;
 
-namespace Transport.Application.UseCase.Admin.Queries
+namespace Transport.Application.UseCase.Admin.Queries.AirLines
 {
     public class GetAirLineQuery : IQuery<List<Airline>>
     {

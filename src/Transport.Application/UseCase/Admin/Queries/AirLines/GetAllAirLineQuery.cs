@@ -2,7 +2,7 @@
 using Transport.Application.Abstractions;
 using Transport.Application.DTOs;
 
-namespace Transport.Application.UseCase.Admin.Queries
+namespace Transport.Application.UseCase.Admin.Queries.AirLines
 {
     public class GetAllAirLineQuery : IQuery<List<AirLineViewModel>>
     {
