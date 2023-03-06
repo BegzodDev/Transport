@@ -20,8 +20,8 @@ builder.Services.AddSwaggerGen(options =>
     options.SwaggerDoc("V1", new OpenApiInfo()
     {
         Version = "V1",
-        Title = "InstalmentSystem",
-        Description = "Based on installment payment"
+        Title = "TransportSystem",
+        Description = "Based on transport payment"
     });
 
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
