@@ -5,7 +5,7 @@ using Transport.Infrastructure.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddTransport(builder.Configuration);
 builder.Services.AddApplication();
 
 builder.Services.Configure<JWTConfiguration>(builder.Configuration.GetSection(nameof(JWTConfiguration)));
@@ -56,13 +56,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(options =>
     {
-        options.SwaggerEndpoint("/swagger/V1/swagger.json", "InstalmentSystem API");
+        options.SwaggerEndpoint("/swagger/V1/swagger.json", "Transport API");
     });
 }
 
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Transport.Application.Abstractions;
+﻿using Transport.Application.Abstractions;
 
 namespace Transport.Infrastructure.Services
 {
@@ -15,7 +10,7 @@ namespace Transport.Infrastructure.Services
             "AB1234561"
 
         };
-        public bool PaymentCheck(string pasportSeries,double price)
+        public bool PaymentCheck(string pasportSeries, double price)
         {
             return (Pasports.Contains(pasportSeries)) ? true : false;
         }

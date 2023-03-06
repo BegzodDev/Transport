@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -18,13 +17,13 @@ namespace Transport.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Flight_From = table.Column<string>(type: "text", nullable: true),
-                    Flight_For = table.Column<string>(type: "text", nullable: true),
-                    Price = table.Column<double>(type: "double precision", nullable: true),
-                    Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    Count_Business_Class_Place = table.Column<int>(type: "integer", nullable: true),
-                    Count_Econom_Class_Place = table.Column<int>(type: "integer", nullable: true),
-                    Count_VIP_Class_Place = table.Column<int>(type: "integer", nullable: true)
+                    Flight_From = table.Column<string>(type: "text", nullable: false),
+                    Flight_For = table.Column<string>(type: "text", nullable: false),
+                    Price = table.Column<double>(type: "double precision", nullable: false),
+                    Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Count_Business_Class_Place = table.Column<int>(type: "integer", nullable: false),
+                    Count_Econom_Class_Place = table.Column<int>(type: "integer", nullable: false),
+                    Count_VIP_Class_Place = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -72,8 +71,8 @@ namespace Transport.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Pasport_Series = table.Column<string>(type: "text", nullable: true),
-                    SHJR = table.Column<string>(type: "text", nullable: true)
+                    UserName = table.Column<string>(type: "text", nullable: false),
+                    PasswordHash = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -169,9 +168,12 @@ namespace Transport.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    dateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    UserId = table.Column<int>(type: "integer", nullable: true),
-                    PlaceAirlineId = table.Column<int>(type: "integer", nullable: true)
+                    dateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    From = table.Column<string>(type: "text", nullable: false),
+                    For = table.Column<string>(type: "text", nullable: false),
+                    PasportSeries = table.Column<string>(type: "text", nullable: false),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    PlaceAirlineId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -180,12 +182,14 @@ namespace Transport.Infrastructure.Migrations
                         name: "FK_ticketAirlines_placeAirlines_PlaceAirlineId",
                         column: x => x.PlaceAirlineId,
                         principalTable: "placeAirlines",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ticketAirlines_users_UserId",
                         column: x => x.UserId,
                         principalTable: "users",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

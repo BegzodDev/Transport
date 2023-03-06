@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Transport.Infrastructure.Persistence;
@@ -12,11 +11,9 @@ using Transport.Infrastructure.Persistence;
 namespace Transport.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230302115056_init")]
-    partial class init
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,45 +24,47 @@ namespace Transport.Infrastructure.Migrations
 
             modelBuilder.Entity("Transport.Domain.Entities.Airline", b =>
                 {
-                    b.Property<int?>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("Count_Business_Class_Place")
+                    b.Property<int>("Count_Business_Class_Place")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("Count_Econom_Class_Place")
+                    b.Property<int>("Count_Econom_Class_Place")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("Count_VIP_Class_Place")
+                    b.Property<int>("Count_VIP_Class_Place")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime?>("Date")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Flight_For")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Flight_From")
+                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<double?>("Price")
+                    b.Property<double>("Price")
                         .HasColumnType("double precision");
 
                     b.HasKey("Id");
 
-                    b.ToTable("airlines");
+                    b.ToTable("airlines", (string)null);
                 });
 
             modelBuilder.Entity("Transport.Domain.Entities.Bus", b =>
                 {
-                    b.Property<int?>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("For")
                         .HasColumnType("text");
@@ -81,7 +80,7 @@ namespace Transport.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("bus");
+                    b.ToTable("bus", (string)null);
                 });
 
             modelBuilder.Entity("Transport.Domain.Entities.PlaceAirline", b =>
@@ -105,7 +104,7 @@ namespace Transport.Infrastructure.Migrations
 
                     b.HasIndex("AirlineId");
 
-                    b.ToTable("placeAirlines");
+                    b.ToTable("placeAirlines", (string)null);
                 });
 
             modelBuilder.Entity("Transport.Domain.Entities.PlaceTrain", b =>
@@ -129,24 +128,36 @@ namespace Transport.Infrastructure.Migrations
 
                     b.HasIndex("TrainId");
 
-                    b.ToTable("placeTrains");
+                    b.ToTable("placeTrains", (string)null);
                 });
 
             modelBuilder.Entity("Transport.Domain.Entities.TicketAirline", b =>
                 {
-                    b.Property<int?>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("PlaceAirlineId")
+                    b.Property<string>("For")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("From")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("PasportSeries")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("PlaceAirlineId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserId")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime?>("dateTime")
+                    b.Property<DateTime>("dateTime")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
@@ -156,7 +167,7 @@ namespace Transport.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ticketAirlines");
+                    b.ToTable("ticketAirlines", (string)null);
                 });
 
             modelBuilder.Entity("Transport.Domain.Entities.TicketBus", b =>
@@ -185,7 +196,7 @@ namespace Transport.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ticketBuses");
+                    b.ToTable("ticketBuses", (string)null);
                 });
 
             modelBuilder.Entity("Transport.Domain.Entities.TicketTrain", b =>
@@ -215,16 +226,16 @@ namespace Transport.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ticketTrains");
+                    b.ToTable("ticketTrains", (string)null);
                 });
 
             modelBuilder.Entity("Transport.Domain.Entities.Train", b =>
                 {
-                    b.Property<int?>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int?>("Count_Business_Class_Place")
                         .HasColumnType("integer");
@@ -249,7 +260,7 @@ namespace Transport.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("trains");
+                    b.ToTable("trains", (string)null);
                 });
 
             modelBuilder.Entity("Transport.Domain.Entities.User", b =>
@@ -260,15 +271,17 @@ namespace Transport.Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
 
-                    b.Property<string>("Pasport_Series")
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("SHJR")
+                    b.Property<string>("UserName")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("users");
+                    b.ToTable("users", (string)null);
 
                     b.UseTptMappingStrategy();
                 });
@@ -302,11 +315,15 @@ namespace Transport.Infrastructure.Migrations
                 {
                     b.HasOne("Transport.Domain.Entities.PlaceAirline", "PlaceAirline")
                         .WithOne("TicketAirline")
-                        .HasForeignKey("Transport.Domain.Entities.TicketAirline", "PlaceAirlineId");
+                        .HasForeignKey("Transport.Domain.Entities.TicketAirline", "PlaceAirlineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Transport.Domain.Entities.User", "User")
                         .WithMany("TicketAirlines")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("PlaceAirline");
 

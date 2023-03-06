@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Transport.Application.Abstractions;
 using Transport.Application.Exceptions;
-using Transport.Domain.Entities;
 
 namespace Transport.Application.UseCase.Admin.Commands.Busses
 {
