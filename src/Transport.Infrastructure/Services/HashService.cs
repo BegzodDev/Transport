@@ -1,6 +1,6 @@
-﻿using System.Text;
+﻿using System.Security.Cryptography;
+using System.Text;
 using Transport.Application.Abstractions;
-using System.Security.Cryptography;
 
 namespace Transport.Infrastructure.Services
 {

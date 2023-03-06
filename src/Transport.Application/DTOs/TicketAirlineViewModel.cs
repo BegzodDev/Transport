@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Transport.Domain.Enums;
+﻿using Transport.Domain.Enums;
 
 namespace Transport.Application.DTOs
 {
@@ -17,6 +12,6 @@ namespace Transport.Application.DTOs
         public int Place { get; set; }
         public Status Status { get; set; }
 
-        public ICollection<TicketAirlineViewModel> TicketAirline { get; set;}
+        public ICollection<TicketAirlineViewModel> TicketAirline { get; set; }
     }
 }
