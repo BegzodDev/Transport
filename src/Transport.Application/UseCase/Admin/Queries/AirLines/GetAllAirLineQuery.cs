@@ -14,7 +14,6 @@ namespace Transport.Application.UseCase.Admin.Queries.AirLines
         {
             _context = context;
         }
-
         public async Task<List<AirLineViewModel>> Handle(GetAllAirLineQuery request, CancellationToken cancellationToken)
         {
             return await _context.airlines.Select(x => new AirLineViewModel()

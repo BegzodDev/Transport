@@ -8,7 +8,6 @@ namespace Transport.Application.UseCase.Admin.Queries.AirLines
     {
         public int Page { get; set; }
         public int Limit { get; set; } = 10;
-
         public GetAirLineQuery(int page)
         {
             Page = page;
@@ -20,7 +19,6 @@ namespace Transport.Application.UseCase.Admin.Queries.AirLines
             {
                 _context = context;
             }
-
             public async Task<List<Airline>> Handle(GetAirLineQuery request, CancellationToken cancellationToken)
             {
                 var skip = request.Page > 0 ? (request.Page - 1) * request.Limit : 0;
@@ -30,7 +28,6 @@ namespace Transport.Application.UseCase.Admin.Queries.AirLines
                     .Skip(skip)
                     .Take(request.Limit)
                     .ToListAsync();
-
                 return airlines;
             }
         }

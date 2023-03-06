@@ -56,7 +56,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(options =>
     {
-        options.SwaggerEndpoint("/swagger/V1/swagger.json", "InstalmentSystem API");
+        options.SwaggerEndpoint("/swagger/V1/swagger.json", "Transport API");
     });
 }
 

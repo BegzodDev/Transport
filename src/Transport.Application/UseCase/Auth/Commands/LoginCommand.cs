@@ -48,7 +48,7 @@ namespace Transport.Application.UseCase.Auth.Commands
             if (await _applicationDbContext.admins.AnyAsync(x => x.Id == user.Id, cancellationToken))
             {
                 claims.Add(new Claim(ClaimTypes.Role, nameof(Domain.Entities.Admin)));
-                //claims.Add(new Claim(ClaimTypes.Role, nameof(Domain.Entities.User)));
+                claims.Add(new Claim(ClaimTypes.Role, nameof(Domain.Entities.User)));
             }
 
             if (await _applicationDbContext.users.AnyAsync(x => x.Id == user.Id, cancellationToken))

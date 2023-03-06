@@ -1,6 +1,4 @@
-﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Transport.Application.Abstractions;
+﻿using Transport.Application.Abstractions;
 using Transport.Application.DTOs;
 
 namespace Transport.Application.UseCase.Admin.Queries.AirLines
@@ -11,17 +9,15 @@ namespace Transport.Application.UseCase.Admin.Queries.AirLines
     }
     public class GetByNameQueryHandler : IQueryHandler<GetByNameQuery, List<AirLineViewModel>>
     {
-
         private readonly IApplicationDbContext _context;
         public GetByNameQueryHandler(IApplicationDbContext context)
         {
             _context = context;
         }
-
         public async Task<List<AirLineViewModel>> Handle(GetByNameQuery request, CancellationToken cancellationToken)
         {
-        //    return await _context.airlines
-        //        .Include(x => x.Flight_From);
+            //    return await _context.airlines
+            //        .Include(x => x.Flight_From);
             throw new NotImplementedException();
         }
     }

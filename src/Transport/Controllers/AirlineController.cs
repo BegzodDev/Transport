@@ -1,8 +1,5 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Transport.Application.UseCase.Admin.Commands.Airlines;
-using Transport.Application.UseCase.Admin.Queries.AirLines;
 using Transport.Application.UseCase.User.Commands;
 using Transport.Application.UseCase.User.Queries;
 
@@ -51,45 +48,6 @@ namespace Transport.Api.Controllers
         }
 
 
-        [HttpPost("Rais")]
-        [Authorize(Policy = "AdminActions")]
-        public async Task<IActionResult> CreateRais([FromForm] CreateAirlineCommand command)
-        {
-            var response = await _mediator.Send(command);
 
-            return Ok(response);
-        }
-
-        [HttpPut("Rais")]
-        [Authorize(Policy = "AdminActions")]
-        public async Task<IActionResult> UpdateRais([FromForm] UpdateAirlineCommand command)
-        {
-            await _mediator.Send(command);
-            return Ok();
-        }
-
-
-        [HttpDelete("Rais")]
-        [Authorize(Policy = "AdminActions")]
-        public async Task<IActionResult> DeleteRais([FromForm] DeleteAirlineCommand command)
-        {
-            await _mediator.Send(command);
-            return Ok();
-        }
-        [HttpGet("Query Id")]
-        [Authorize(Policy ="AdminActions")]
-        public async Task<IActionResult> GetRays(/*[FromForm]*/ GetAirLineQuery query)
-        {
-            var response = await _mediator.Send(query);
-            return Ok(response);
-        }
-
-        [HttpGet("Query")]
-        [Authorize(Policy ="AdminActions")]
-        public async Task<IActionResult> GetAllRays(/*[FromForm]*/ GetAllAirLineQuery query)
-        {
-            var response = await _mediator.Send(query);
-            return Ok(response);
-        }
     }
 }
