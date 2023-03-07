@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
@@ -7,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Transport.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class admin_dataAdded : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -21,7 +20,7 @@ namespace Transport.Infrastructure.Migrations
                     Flight_From = table.Column<string>(type: "text", nullable: true),
                     Flight_For = table.Column<string>(type: "text", nullable: true),
                     Price = table.Column<double>(type: "double precision", nullable: true),
-                    Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    Date = table.Column<DateOnly>(type: "date", nullable: true),
                     Count_Business_Class_Place = table.Column<int>(type: "integer", nullable: true),
                     Count_Econom_Class_Place = table.Column<int>(type: "integer", nullable: true),
                     Count_VIP_Class_Place = table.Column<int>(type: "integer", nullable: true)
@@ -40,7 +39,7 @@ namespace Transport.Infrastructure.Migrations
                     From = table.Column<string>(type: "text", nullable: true),
                     For = table.Column<string>(type: "text", nullable: true),
                     Price = table.Column<double>(type: "double precision", nullable: true),
-                    OrderForBusId = table.Column<int>(type: "integer", nullable: true)
+                    BusId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -72,8 +71,8 @@ namespace Transport.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Pasport_Series = table.Column<string>(type: "text", nullable: true),
-                    SHJR = table.Column<string>(type: "text", nullable: true)
+                    UserName = table.Column<string>(type: "text", nullable: false),
+                    PasswordHash = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -169,7 +168,10 @@ namespace Transport.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    dateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    dateTime = table.Column<DateOnly>(type: "date", nullable: true),
+                    From = table.Column<string>(type: "text", nullable: true),
+                    For = table.Column<string>(type: "text", nullable: true),
+                    PasportSeries = table.Column<string>(type: "text", nullable: true),
                     UserId = table.Column<int>(type: "integer", nullable: true),
                     PlaceAirlineId = table.Column<int>(type: "integer", nullable: true)
                 },

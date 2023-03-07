@@ -12,8 +12,8 @@ using Transport.Infrastructure.Persistence;
 namespace Transport.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230302115056_init")]
-    partial class init
+    [Migration("20230305113510_admin_dataAdded")]
+    partial class admin_dataAdded
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,11 +27,11 @@ namespace Transport.Infrastructure.Migrations
 
             modelBuilder.Entity("Transport.Domain.Entities.Airline", b =>
                 {
-                    b.Property<int?>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int?>("Count_Business_Class_Place")
                         .HasColumnType("integer");
@@ -42,8 +42,8 @@ namespace Transport.Infrastructure.Migrations
                     b.Property<int?>("Count_VIP_Class_Place")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime?>("Date")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateOnly?>("Date")
+                        .HasColumnType("date");
 
                     b.Property<string>("Flight_For")
                         .HasColumnType("text");
@@ -61,20 +61,20 @@ namespace Transport.Infrastructure.Migrations
 
             modelBuilder.Entity("Transport.Domain.Entities.Bus", b =>
                 {
-                    b.Property<int?>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("BusId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("For")
                         .HasColumnType("text");
 
                     b.Property<string>("From")
                         .HasColumnType("text");
-
-                    b.Property<int?>("OrderForBusId")
-                        .HasColumnType("integer");
 
                     b.Property<double?>("Price")
                         .HasColumnType("double precision");
@@ -140,14 +140,23 @@ namespace Transport.Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
 
+                    b.Property<string>("For")
+                        .HasColumnType("text");
+
+                    b.Property<string>("From")
+                        .HasColumnType("text");
+
+                    b.Property<string>("PasportSeries")
+                        .HasColumnType("text");
+
                     b.Property<int?>("PlaceAirlineId")
                         .HasColumnType("integer");
 
                     b.Property<int?>("UserId")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime?>("dateTime")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateOnly?>("dateTime")
+                        .HasColumnType("date");
 
                     b.HasKey("Id");
 
@@ -220,11 +229,11 @@ namespace Transport.Infrastructure.Migrations
 
             modelBuilder.Entity("Transport.Domain.Entities.Train", b =>
                 {
-                    b.Property<int?>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int?>("Count_Business_Class_Place")
                         .HasColumnType("integer");
@@ -260,10 +269,12 @@ namespace Transport.Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
 
-                    b.Property<string>("Pasport_Series")
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("SHJR")
+                    b.Property<string>("UserName")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");

@@ -4,8 +4,8 @@
     {
         public User()
         {
-            TicketAirlines= new HashSet<TicketAirline>();
-            TicketTrains= new HashSet<TicketTrain>();
+            TicketAirlines = new HashSet<TicketAirline>();
+            TicketTrains = new HashSet<TicketTrain>();
             TicketBuses = new HashSet<TicketBus>();
         }
 

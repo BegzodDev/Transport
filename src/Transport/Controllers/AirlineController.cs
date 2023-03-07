@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Transport.Application.UseCase.Admin.Commands.Airlines;
 using Transport.Application.UseCase.User.Commands;

@@ -1,10 +1,7 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json;
 using Transport.Application.Abstractions;
-using Transport.Application.DTOs;
 using Transport.Application.Exceptions;
 using Transport.Domain.Entities;
 using Transport.Domain.Enums;
@@ -52,17 +49,17 @@ namespace Transport.Application.UseCase.User.Commands
             _distrubuteCache = distributedCache;
         }
 
-        public async Task<Unit> Handle(CreateAirlineTickerCommand command,CancellationToken cancellationToken)
+        public async Task<Unit> Handle(CreateAirlineTickerCommand command, CancellationToken cancellationToken)
         {
             if (!_govermentService.Check(command.PasportSeies!))
             {
                 throw new Exception("Pasport series is Don't have in our Base");
             }
             _securityService.CheckSecure(command.PasportSeies!);
-            var reys = _context.airlines.FirstOrDefault(x => x.Flight_From!.ToLower() == command.From!.ToLower() && 
+            var reys = _context.airlines.FirstOrDefault(x => x.Flight_From!.ToLower() == command.From!.ToLower() &&
                                                         x.Flight_For!.ToLower() == command.For!.ToLower() &&
                                                         x.Date == command.Date);
-            
+
             if (reys == null)
             {
                 throw new AirlineNotFoundException();
@@ -106,13 +103,13 @@ namespace Transport.Application.UseCase.User.Commands
                 Place_in_Ticket = command.Place,
                 AirlineId = reys.Id
             };
-            
-            var user = _context.users.FirstOrDefault(x => x.UserName == command.From);
 
-            
+            var user = _context.users.FirstOrDefault(x => x.Id == _currentUserService.UserId);
+
+
             var tickets = new TicketAirline();
 
-            if (!_economyService.PaymentCheck(command.PasportSeies!,(double)reys.Price!))
+            if (!_economyService.PaymentCheck(command.PasportSeies!, (double)reys.Price!))
             {
                 throw new Exception("Payment is valid");
             }
@@ -120,22 +117,22 @@ namespace Transport.Application.UseCase.User.Commands
             {
                 if (_economyService.PaymentCheck(command.PasportSeies!, (double)reys.Price))
                 {
-                    tickets= new TicketAirline()
+                    tickets = new TicketAirline()
                     {
                         UserId = reys.Id,
                         PlaceAirlineId = place.Id,
                         From = reys.Flight_From,
                         For = reys.Flight_For,
                         dateTime = reys.Date,
-                        PasportSeries= command.PasportSeies,
+                        PasportSeries = command.PasportSeies,
                     };
-                    
+
                 }
                 else { throw new Exception("Invalid pasport or not enoughmoney"); }
             }
             else if (command.Status == Status.Buiseness)
             {
-                if (_economyService.PaymentCheck(command.PasportSeies!, ((double)reys.Price)*1.5))
+                if (_economyService.PaymentCheck(command.PasportSeies!, ((double)reys.Price) * 1.5))
                 {
                     tickets = new TicketAirline()
                     {
@@ -153,7 +150,7 @@ namespace Transport.Application.UseCase.User.Commands
             }
             else if (command.Status == Status.VIP)
             {
-                if (_economyService.PaymentCheck(command.PasportSeies!, ((double)reys.Price)*2.5))
+                if (_economyService.PaymentCheck(command.PasportSeies!, ((double)reys.Price) * 2.5))
                 {
 
                     tickets = new TicketAirline()
