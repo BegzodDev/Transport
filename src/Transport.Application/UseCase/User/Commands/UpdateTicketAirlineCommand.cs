@@ -28,7 +28,7 @@ namespace Transport.Application.UseCase.User.Commands
                 throw new AirlineNotFoundException();
             }
 
-            ticket.dateTime = command.Date;
+            ticket.dateTime = command.Date.ToDateTime(TimeOnly.MinValue);
             await _context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;

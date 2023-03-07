@@ -13,7 +13,6 @@ namespace Transport.Infrastructure.Persistence.EntityTypeConfigurations
             builder.HasMany(x => x.TicketAirlines).WithOne(x => x.User).HasForeignKey(x => x.UserId);
             builder.HasMany(x => x.TicketTrains).WithOne(x => x.User).HasForeignKey(x => x.UserId);
             builder.HasMany(x => x.TicketBuses).WithOne(x => x.User).HasForeignKey(x => x.UserId);
-
         }
     }
 }

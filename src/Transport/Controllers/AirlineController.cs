@@ -19,7 +19,7 @@ namespace Transport.Api.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Create(CreateAirlineTickerCommand command)
+        public async Task<IActionResult> Create([FromForm]CreateAirlineTickerCommand command)
         {
             await _mediator.Send(command);
             return Ok();
@@ -27,7 +27,7 @@ namespace Transport.Api.Controllers
 
         [HttpDelete]
         [Authorize]
-        public async Task<IActionResult> Delete(DeleteTicketAirlineCommand command)
+        public async Task<IActionResult> Delete([FromForm] DeleteTicketAirlineCommand command)
         {
             await _mediator.Send(command);
             return Ok();
@@ -35,7 +35,7 @@ namespace Transport.Api.Controllers
 
         [HttpPut]
         [Authorize]
-        public async Task<IActionResult> Update(UpdateTicketAirlineCommand command)
+        public async Task<IActionResult> Update([FromForm] UpdateTicketAirlineCommand command)
         {
             await _mediator.Send(command);
             return Ok();
@@ -43,38 +43,10 @@ namespace Transport.Api.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> Update(GetTicketQuery query)
+        public async Task<IActionResult> Update([FromForm] GetTicketQuery query)
         {
             var response = await _mediator.Send(query);
             return Ok(response);
         }
-
-
-        [HttpPost("Rais")]
-        [Authorize(Policy = "AdminActions")]
-        public async Task<IActionResult> Create(/*[FromForm]*/ CreateAirlineCommand command)
-        {
-            var response = await _mediator.Send(command);
-
-            return Ok(response);
-        }
-
-        [HttpPut("Rais")]
-        [Authorize(Policy = "AdminActions")]
-        public async Task<IActionResult> Update([FromForm] UpdateAirlineCommand command)
-        {
-            await _mediator.Send(command);
-            return Ok();
-        }
-
-
-        [HttpDelete("Rais")]
-        [Authorize(Policy = "AdminActions")]
-        public async Task<IActionResult> Delete([FromForm] DeleteAirlineCommand command)
-        {
-            await _mediator.Send(command);
-            return Ok();
-        }
-
     }
 }
