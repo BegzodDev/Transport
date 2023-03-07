@@ -56,6 +56,9 @@ namespace Transport.Application.UseCase.User.Commands
                 throw new Exception("Pasport series is Don't have in our Base");
             }
             _securityService.CheckSecure(command.PasportSeies!);
+            var reys = _context.airlines.FirstOrDefault(x => x.Flight_From!.ToLower() == command.From!.ToLower() &&
+                                                        x.Flight_For!.ToLower() == command.For!.ToLower() &&
+                                                        x.Date == command.Date);
 
             var reys = _context.airlines.FirstOrDefault(x => x.Flight_From.ToLower() == command.From.ToLower() &&
                                                         x.Flight_For.ToLower() == command.For.ToLower() &&
@@ -108,6 +111,10 @@ namespace Transport.Application.UseCase.User.Commands
                 AirlineId = reys.Id
             };
 
+            var user = _context.users.FirstOrDefault(x => x.Id == _currentUserService.UserId);
+
+
+            var tickets = new TicketAirline();
             await _context.placeAirlines.AddAsync(place);
             await _context.SaveChangesAsync(cancellationToken);
 
@@ -122,6 +129,7 @@ namespace Transport.Application.UseCase.User.Commands
             {
                 if (_economyService.PaymentCheck(command.PasportSeies!, (double)reys.Price))
                 {
+                    tickets = new TicketAirline()
                     var ticket = new TicketAirline()
                     {
                         
