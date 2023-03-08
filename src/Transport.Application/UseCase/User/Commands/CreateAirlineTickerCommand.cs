@@ -51,10 +51,12 @@ namespace Transport.Application.UseCase.User.Commands
 
         public async Task<Unit> Handle(CreateAirlineTickerCommand command, CancellationToken cancellationToken)
         {
+            //Check Pasport from goverment
             if (!_govermentService.Check(command.PasportSeies!))
             {
                 throw new Exception("Pasport series is Don't have in our Base");
             }
+            //Check Pasport from Secure
             _securityService.CheckSecure(command.PasportSeies!);
 
             var reys = _context.airlines.FirstOrDefault(x => x.Flight_From.ToLower() == command.From.ToLower() &&
@@ -113,11 +115,12 @@ namespace Transport.Application.UseCase.User.Commands
 
 
 
-
+            //Check Pay from economy
             if (!_economyService.PaymentCheck(command.PasportSeies!, (double)reys.Price!))
             {
                 throw new Exception("Payment is valid");
             }
+
             else if (command.Status == Status.Econom)
             {
                 if (_economyService.PaymentCheck(command.PasportSeies!, (double)reys.Price))
@@ -126,7 +129,8 @@ namespace Transport.Application.UseCase.User.Commands
                     {
                         
                         UserId = _currentUserService.UserId,
-                        PlaceAirlineId = place.Id.Value,
+                        PlaceAirlineId = place.Id,
+
                         From = reys.Flight_From,
                         For = reys.Flight_For,
                         dateTime = reys.Date,
@@ -144,7 +148,7 @@ namespace Transport.Application.UseCase.User.Commands
                    var ticket = new TicketAirline()
                     {
                         UserId = _currentUserService.UserId,
-                        PlaceAirlineId = place.Id.Value,
+                        PlaceAirlineId = place.Id,
                         From = reys.Flight_From,
                         For = reys.Flight_For,
                         dateTime = reys.Date,
@@ -165,7 +169,7 @@ namespace Transport.Application.UseCase.User.Commands
                     var ticket = new TicketAirline()
                     {
                         UserId = _currentUserService.UserId,
-                        PlaceAirlineId = place.Id.Value,
+                        PlaceAirlineId = place.Id,
                         From = reys.Flight_From,
                         For = reys.Flight_For,
                         dateTime = reys.Date,

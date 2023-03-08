@@ -52,7 +52,7 @@ namespace Transport.Api.Controllers
 
         [HttpPost("Admin")]
         //[Authorize(Policy = "AdminActions")]
-        public async Task<IActionResult> Create(CreateAirlineCommand command)
+        public async Task<IActionResult> Create([FromForm]CreateAirlineCommand command)
         {
             var response = await _mediator.Send(command);
 
