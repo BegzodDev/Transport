@@ -58,9 +58,6 @@ namespace Transport.Application.UseCase.User.Commands
             }
             //Check Pasport from Secure
             _securityService.CheckSecure(command.PasportSeies!);
-            var reys = _context.airlines.FirstOrDefault(x => x.Flight_From!.ToLower() == command.From!.ToLower() &&
-                                                        x.Flight_For!.ToLower() == command.For!.ToLower() &&
-                                                        x.Date == command.Date);
 
             var reys = _context.airlines.FirstOrDefault(x => x.Flight_From.ToLower() == command.From.ToLower() &&
                                                         x.Flight_For.ToLower() == command.For.ToLower() &&
@@ -132,7 +129,6 @@ namespace Transport.Application.UseCase.User.Commands
             {
                 if (_economyService.PaymentCheck(command.PasportSeies!, (double)reys.Price))
                 {
-                    tickets = new TicketAirline()
                     var ticket = new TicketAirline()
                     {
                         
@@ -157,6 +153,7 @@ namespace Transport.Application.UseCase.User.Commands
                     {
                         UserId = _currentUserService.UserId,
                         PlaceAirlineId = place.Id,
+
                         From = reys.Flight_From,
                         For = reys.Flight_For,
                         dateTime = reys.Date,
@@ -178,6 +175,7 @@ namespace Transport.Application.UseCase.User.Commands
                     {
                         UserId = _currentUserService.UserId,
                         PlaceAirlineId = place.Id,
+
                         From = reys.Flight_From,
                         For = reys.Flight_For,
                         dateTime = reys.Date,
