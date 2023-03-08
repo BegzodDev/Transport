@@ -59,7 +59,7 @@ namespace Transport.Infrastructure.Migrations
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Flight_For")
                         .IsRequired()
@@ -76,6 +76,7 @@ namespace Transport.Infrastructure.Migrations
 
                     b.ToTable("airlines");
                     b.ToTable("airlines", (string)null);
+
                 });
 
             modelBuilder.Entity("Transport.Domain.Entities.Bus", b =>
@@ -112,16 +113,16 @@ namespace Transport.Infrastructure.Migrations
 
             modelBuilder.Entity("Transport.Domain.Entities.PlaceAirline", b =>
                 {
-                    b.Property<int?>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("AirlineId")
+                    b.Property<int>("AirlineId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("Place_in_Ticket")
+                    b.Property<int>("Place_in_Ticket")
                         .HasColumnType("integer");
 
                     b.Property<int>("Status")
@@ -210,7 +211,7 @@ namespace Transport.Infrastructure.Migrations
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("dateTime")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 
@@ -235,7 +236,7 @@ namespace Transport.Infrastructure.Migrations
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<double>("Sum")
                         .HasColumnType("double precision");
@@ -271,7 +272,7 @@ namespace Transport.Infrastructure.Migrations
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("dateTime")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.HasKey("Id");
 
@@ -302,7 +303,7 @@ namespace Transport.Infrastructure.Migrations
                         .HasColumnType("integer");
 
                     b.Property<DateTime?>("Date")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("For")
                         .HasColumnType("text");
@@ -354,7 +355,9 @@ namespace Transport.Infrastructure.Migrations
                 {
                     b.HasOne("Transport.Domain.Entities.Airline", "Airline")
                         .WithMany("PlaceAirlines")
-                        .HasForeignKey("AirlineId");
+                        .HasForeignKey("AirlineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Airline");
                 });
@@ -443,7 +446,8 @@ namespace Transport.Infrastructure.Migrations
 
             modelBuilder.Entity("Transport.Domain.Entities.PlaceAirline", b =>
                 {
-                    b.Navigation("TicketAirline");
+                    b.Navigation("TicketAirline")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Transport.Domain.Entities.PlaceTrain", b =>

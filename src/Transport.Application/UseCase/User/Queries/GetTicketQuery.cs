@@ -7,7 +7,7 @@ namespace Transport.Application.UseCase.User.Queries
 {
     public class GetTicketQuery : IQuery<TicketAirlineViewModel>
     {
-        public int UserId { get; set; }
+        public string? PasportSeries { get; set; }
     }
 
     public class GetTicketQueryHandelr : IQueryHandler<GetTicketQuery, TicketAirlineViewModel>
@@ -21,7 +21,7 @@ namespace Transport.Application.UseCase.User.Queries
 
         public async Task<TicketAirlineViewModel> Handle(GetTicketQuery query, CancellationToken cancellationToken)
         {
-            var ticket = await _context.ticketAirlines.FirstOrDefaultAsync(x => x.UserId == query.UserId);
+            var ticket = await _context.ticketAirlines.FirstOrDefaultAsync(x => x.PasportSeries == query.PasportSeries);
 
             if (ticket == null)
             {

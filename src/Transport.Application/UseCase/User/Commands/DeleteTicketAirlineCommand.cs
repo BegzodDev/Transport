@@ -7,19 +7,22 @@ namespace Transport.Application.UseCase.User.Commands
 {
     public class DeleteTicketAirlineCommand : ICommand<Unit>
     {
-        public int Id { get; set; }
+        public string? PasportSeries { get; set; }
     }
     public class DeleteTicketAirlineCommandHandler : ICommandHandler<DeleteTicketAirlineCommand, Unit>
     {
         private readonly IApplicationDbContext _context;
-        public DeleteTicketAirlineCommandHandler(IApplicationDbContext context)
+        private readonly ICurrentUserService _currentUserService;
+        public DeleteTicketAirlineCommandHandler(IApplicationDbContext context,ICurrentUserService currentUserService)
         {
             _context = context;
+            _currentUserService= currentUserService;
         }
 
         public async Task<Unit> Handle(DeleteTicketAirlineCommand commamd, CancellationToken cancellationToken)
         {
-            var ticket = await _context.ticketAirlines.FirstOrDefaultAsync(x => x.Id == commamd.Id);
+            var ticket = await _context.ticketAirlines.FirstOrDefaultAsync(x => x.PasportSeries == commamd.PasportSeries 
+                                                                            && x.UserId == _currentUserService.UserId);
 
             if (ticket == null)
             {
