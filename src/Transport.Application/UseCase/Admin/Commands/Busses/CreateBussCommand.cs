@@ -25,7 +25,7 @@ namespace Transport.Application.UseCase.Admin.Commands.Busses
                 From = request.From,
                 For = request.For,
                 Price = request.Price,
-                OrderForBusId = request.OrderForBusId,
+                BusId = request.OrderForBusId,
             };
             await _context.bus.AddAsync(entity, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
