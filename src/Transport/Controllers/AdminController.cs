@@ -1,8 +1,8 @@
-﻿using Amazon.Auth.AccessControlPolicy;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Transport.Application.UseCase.Admin.Commands.Airlines;
+using Transport.Application.UseCase.Admin.Queries.AirLineQuery;
 
 namespace Transport.Api.Controllers
 {
@@ -16,16 +16,16 @@ namespace Transport.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("Admin")]
+        [HttpPost]
         [Authorize(Policy = "AdminActions")]
         public async Task<IActionResult> Create(CreateAirlineCommand command)
         {
-            var response = await _mediator.Send(command);
+            await _mediator.Send(command);
 
             return Ok();
         }
 
-        [HttpPut("Query")]
+        [HttpPut]
         [Authorize(Policy = "AdminActions")]
         public async Task<IActionResult> Update([FromForm] UpdateAirlineCommand command)
         {
@@ -34,7 +34,7 @@ namespace Transport.Api.Controllers
         }
 
 
-        [HttpDelete("Query")]
+        [HttpDelete]
         [Authorize(Policy = "AdminActions")]
         public async Task<IActionResult> Delete([FromForm] DeleteAirlineCommand command)
         {
@@ -42,5 +42,29 @@ namespace Transport.Api.Controllers
             return Ok();
         }
 
+        //[HttpGet("Id")]
+        //[Authorize(Policy = "AdminActions")]
+        //public async Task<IActionResult> Get([FromForm] GetAirLineQuery query)
+        //{
+        //    var response = await _mediator.Send(query);
+        //    return Ok(response);
+        //}
+
+        //[HttpGet]
+        //[Authorize(Policy = "AdminActions")]
+        //public async Task<IActionResult> GetAll([FromForm] GetAllAirLineQuery query)
+        //{
+        //    var response = await _mediator.Send(query);
+        //    return Ok(response);
+
+        //    //var response = await _mediator.Send(new GetAllAirLineQuery());
+
+        //    //if (response.Count == 0)
+        //    //{
+        //    //    return Ok("");
+        //    //}
+
+        //    //return Ok(response);
+        //}
     }
 }

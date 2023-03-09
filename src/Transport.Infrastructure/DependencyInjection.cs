@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Text;
@@ -23,14 +24,19 @@ namespace Transport.Infrastructure
                 options.Configuration = "localhost";
                 options.InstanceName = "local";
             });
-            services.AddSingleton<IHashService, HashService>();
-            services.AddScoped<ITokenService, JWTService>();
-            services.AddScoped<ICurrentUserService, CurrentUserService>();
-            services.AddScoped<IGovermentService, GovermentService>();
-            services.AddScoped<IEconomyService, EconomyService>();
-            services.AddScoped<ISecurityService, SecureService>();
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+
+
+
+
+                services.AddSingleton<IHashService, HashService>();
+                services.AddScoped<ITokenService, JWTService>();
+                services.AddScoped<ICurrentUserService, CurrentUserService>();
+                services.AddScoped<IGovermentService, GovermentService>();
+                services.AddScoped<IEconomyService, EconomyService>();
+                services.AddScoped<ISecurityService, SecureService>();
+
+                services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                .AddJwtBearer(options =>
                {
                    options.TokenValidationParameters = new TokenValidationParameters
@@ -44,6 +50,8 @@ namespace Transport.Infrastructure
                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWTConfiguration:Secret"]!))
                    };
                });
+
+
 
             services.AddAuthorization(options =>
             {

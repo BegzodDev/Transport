@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Transport.Application.UseCase.Admin.Commands.Airlines;
 using Transport.Application.UseCase.User.Commands;
 using Transport.Application.UseCase.User.Queries;
 
@@ -19,7 +18,7 @@ namespace Transport.Api.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Create([FromForm]CreateAirlineTickerCommand command)
+        public async Task<IActionResult> Create([FromForm] CreateAirlineTickerCommand command)
         {
             await _mediator.Send(command);
             return Ok();
