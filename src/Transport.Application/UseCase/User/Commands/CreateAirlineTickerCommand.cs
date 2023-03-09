@@ -124,7 +124,7 @@ namespace Transport.Application.UseCase.User.Commands
                 {
                     var ticket = new TicketAirline()
                     {
-                        
+
                         UserId = _currentUserService.UserId,
                         PlaceAirlineId = place.Id.Value,
                         From = reys.Flight_From,
@@ -141,7 +141,7 @@ namespace Transport.Application.UseCase.User.Commands
             {
                 if (_economyService.PaymentCheck(command.PasportSeies!, ((double)reys.Price) * 1.5))
                 {
-                   var ticket = new TicketAirline()
+                    var ticket = new TicketAirline()
                     {
                         UserId = _currentUserService.UserId,
                         PlaceAirlineId = place.Id.Value,
