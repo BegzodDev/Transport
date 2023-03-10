@@ -183,12 +183,12 @@ namespace Transport.Application.UseCase.User.Commands
 
                     };
                     await _context.ticketAirlines.AddAsync(ticket);
-
                 }
                 else { throw new Exception("Invalid pasport or not enoughmoney"); }
             }
 
             await _context.SaveChangesAsync(cancellationToken);
+
             return Unit.Value;
         }
     }
