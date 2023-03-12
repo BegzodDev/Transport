@@ -7,7 +7,7 @@ namespace Transport.Application.UseCase.User.Commands
 {
     public class UpdateTicketAirlineCommand : ICommand<Unit>
     {
-        public int Id { get; set; }
+        public string? PasportSeries { get; set; }
         public DateOnly Date { get; set; }
     }
     public class UpdateTicketAirlineCommandHandler : ICommandHandler<UpdateTicketAirlineCommand, Unit>
@@ -21,7 +21,7 @@ namespace Transport.Application.UseCase.User.Commands
 
         public async Task<Unit> Handle(UpdateTicketAirlineCommand command, CancellationToken cancellationToken)
         {
-            var ticket = await _context.ticketAirlines.FirstOrDefaultAsync(x => x.Id == command.Id, cancellationToken);
+            var ticket = await _context.ticketAirlines.FirstOrDefaultAsync(x => x.PasportSeries == command.PasportSeries, cancellationToken);
 
             if (ticket == null)
             {
@@ -29,6 +29,7 @@ namespace Transport.Application.UseCase.User.Commands
             }
 
             ticket.dateTime = command.Date.ToDateTime(TimeOnly.MinValue);
+
             await _context.SaveChangesAsync(cancellationToken);
 
             return Unit.Value;

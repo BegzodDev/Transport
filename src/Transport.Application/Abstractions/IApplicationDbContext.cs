@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Transport.Domain.Entities;
 
 namespace Transport.Application.Abstractions
@@ -15,6 +16,8 @@ namespace Transport.Application.Abstractions
         DbSet<TicketAirline> ticketAirlines { get; set; }
         DbSet<TicketTrain> ticketTrains { get; set; }
         DbSet<TicketBus> ticketBuses { get; set; }
+
+        DatabaseFacade Database { get; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
