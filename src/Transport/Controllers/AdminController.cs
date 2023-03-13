@@ -42,29 +42,25 @@ namespace Transport.Api.Controllers
             return Ok();
         }
 
-        //[HttpGet("Id")]
-        //[Authorize(Policy = "AdminActions")]
-        //public async Task<IActionResult> Get([FromForm] GetAirLineQuery query)
-        //{
-        //    var response = await _mediator.Send(query);
-        //    return Ok(response);
-        //}
+        [HttpGet("Id")]
+        [Authorize(Policy = "AdminActions")]
+        public async Task<IActionResult> Get(int page)
+        {
+            var response = await _mediator.Send(new GetAirLineQuery(page));
+            return Ok(response);
+        }
 
-        //[HttpGet]
-        //[Authorize(Policy = "AdminActions")]
-        //public async Task<IActionResult> GetAll([FromForm] GetAllAirLineQuery query)
-        //{
-        //    var response = await _mediator.Send(query);
-        //    return Ok(response);
+        [HttpGet]
+        [Authorize(Policy = "AdminActions")]
+        public async Task<IActionResult> GetAll([FromForm] GetAllAirLineQuery query)
+        {
+            var manufacturers = await _mediator.Send(new GetAllAirLineQuery());
 
-        //    //var response = await _mediator.Send(new GetAllAirLineQuery());
-
-        //    //if (response.Count == 0)
-        //    //{
-        //    //    return Ok("");
-        //    //}
-
-        //    //return Ok(response);
-        //}
+            if (manufacturers.Count == 0)
+            {
+                return Ok("");
+            }
+            return Ok(manufacturers);
+        }
     }
 }
