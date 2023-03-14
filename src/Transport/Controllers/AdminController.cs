@@ -52,7 +52,7 @@ namespace Transport.Api.Controllers
 
         [HttpGet]
         [Authorize(Policy = "AdminActions")]
-        public async Task<IActionResult> GetAll([FromForm] GetAllAirLineQuery query)
+        public async Task<IActionResult> GetAll()
         {
             var manufacturers = await _mediator.Send(new GetAllAirLineQuery());
 
