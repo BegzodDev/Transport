@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Transport.Application.Abstractions;
 using Transport.Application.Exceptions;
-using Transport.Domain.Entities;
 
 namespace Transport.Application.UseCase.Admin.Commands.Busses
 {
@@ -32,7 +31,7 @@ namespace Transport.Application.UseCase.Admin.Commands.Busses
             entity.From = request.From ?? entity.From;
             entity.For = request.For ?? entity.For;
             entity.Price = request.Price == 0 ? entity.Price : request.Price;
-            entity.OrderForBusId = request.OrderForBusId ?? entity.OrderForBusId;
+            entity.BusId = request.OrderForBusId ?? entity.BusId;
 
             _context.bus.Update(entity);
             await _context.SaveChangesAsync(cancellationToken);

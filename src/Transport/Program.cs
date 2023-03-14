@@ -5,7 +5,7 @@ using Transport.Infrastructure.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddTransport(builder.Configuration);
 builder.Services.AddApplication();
 
 builder.Services.Configure<JWTConfiguration>(builder.Configuration.GetSection(nameof(JWTConfiguration)));
@@ -14,14 +14,13 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
-
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("V1", new OpenApiInfo()
     {
         Version = "V1",
-        Title = "InstalmentSystem",
-        Description = "Based on installment payment"
+        Title = "Transport",
+        Description = "Based on transport"
     });
 
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
@@ -32,6 +31,8 @@ builder.Services.AddSwaggerGen(options =>
         Description = "Bearer Authentication",
         Type = SecuritySchemeType.Http
     });
+
+
 
     options.AddSecurityRequirement(new OpenApiSecurityRequirement()
     {
@@ -56,13 +57,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI(options =>
     {
-        options.SwaggerEndpoint("/swagger/V1/swagger.json", "InstalmentSystem API");
+        options.SwaggerEndpoint("/swagger/V1/swagger.json", "Transport API");
     });
 }
 
-
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

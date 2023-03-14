@@ -22,6 +22,7 @@ namespace Transport.Application.UseCase.User.Commands
         public RegisterUserCommandHandler(IApplicationDbContext dbContext, IHashService hashService)
         {
             _dbContext = dbContext;
+
             _hashService = hashService;
         }
 
@@ -38,7 +39,7 @@ namespace Transport.Application.UseCase.User.Commands
                 PasswordHash = _hashService.GetHash(command.Password!),
             };
 
-            _dbContext.users.Add(user);
+            await _dbContext.users.AddAsync(user,cancellationToken);
             await _dbContext.SaveChangesAsync(cancellationToken);
             return Unit.Value;
         }

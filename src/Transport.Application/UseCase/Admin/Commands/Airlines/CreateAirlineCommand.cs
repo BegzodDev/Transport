@@ -8,10 +8,10 @@ namespace Transport.Application.UseCase.Admin.Commands.Airlines
         public string Flight_From { get; set; } = string.Empty;
         public string Flight_To { get; set; } = string.Empty;  // Flight_For
         public double Price { get; set; }
-        public DateOnly Date { get; set; }
-        public int? Count_Business_Class_Place { get; set; }
-        public int? Count_Econom_Class_Place { get; set; }
-        public int? Count_VIP_Class_Place { get; set; }
+        public DateTime Date { get; set; }
+        public int Count_Business_Class_Place { get; set; }
+        public int Count_Econom_Class_Place { get; set; }
+        public int Count_VIP_Class_Place { get; set; }
 
     }
 
@@ -40,7 +40,6 @@ namespace Transport.Application.UseCase.Admin.Commands.Airlines
             await _context.SaveChangesAsync(cancellationToken);
 
             return entity.Id;
-
         }
     }
 }

@@ -11,8 +11,7 @@ namespace Transport.Infrastructure.Persistence.EntityTypeConfigurations
             builder.HasKey(x => x.Id);
 
             builder.HasOne(x => x.PlaceAirline)
-                .WithOne(x => x.TicketAirline)
-                .HasForeignKey<TicketAirline>(x => x.PlaceAirlineId);
+                .WithOne(x => x.TicketAirline);
         }
     }
 }

@@ -9,6 +9,7 @@ namespace Transport.Infrastructure.Persistence
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
         public DbSet<Admin> admins { get; set; }
         public DbSet<User> users { get; set; }

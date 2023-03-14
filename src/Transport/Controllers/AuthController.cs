@@ -16,7 +16,7 @@ namespace Transport.Api.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login(LoginCommand command)
+        public async Task<IActionResult> Login([FromForm] LoginCommand command)
         {
             var token = await _mediator.Send(command);
 
