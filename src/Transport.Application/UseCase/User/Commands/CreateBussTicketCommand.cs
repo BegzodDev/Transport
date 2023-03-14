@@ -12,7 +12,6 @@ namespace Transport.Application.UseCase.User.Commands
         public string? PasportSeies { get; set; }
         public string For { get; set; }
         public string From { get; set; }
-        public Station Station { get; set; }
         public double? Price { get; set; }
     }
 
@@ -71,6 +70,7 @@ namespace Transport.Application.UseCase.User.Commands
 
             var busTicket = new TicketBus()
             {
+                PassportSeria = request.PasportSeies,
                 BusId = bus.Id,
                 Date = DateTime.UtcNow,
                 Sum = (double)bus.Price,
