@@ -17,24 +17,22 @@ namespace Transport.Application.UseCase.User.Commands
     public class CreateTrainTicketCommand : ICommand<Unit>
     {
         [Required]
-
         public string? PasportSeries { get; set; }
+        
         [Required]
-
-        public DateOnly? Date { get; set; }
+        public DateTime Date { get; set; }
+        
         [Required]
-
         public string? From { get; set; }
+        
         [Required]
-
         public string? For { get; set; }
+        
         [Required]
-
-        public int? Place { get; set; }
+        public int Place { get; set; }
+        
         [Required]
-
         public Status Status { get; set; }
-        [Required]
 
     }
 
@@ -72,15 +70,17 @@ namespace Transport.Application.UseCase.User.Commands
                 throw new Exception("Pasport series is don't have in our base");
             }
             _securityService.CheckSecure(command.PasportSeries!);
-            var reys = _context.airlines.FirstOrDefault(x => x.Flight_From!.ToLower() == command.From!.ToLower() &&
-                                                        x.Flight_For!.ToLower() == command.For!.ToLower() &&
-                                                        x.Date == command.Date);
+            var reys = _context.airlines.FirstOrDefault(x => x.Flight_From.ToLower() == command.From.ToLower() &&
+                                                        x.Flight_For.ToLower() == command.For.ToLower() &&
+                                                        x.Date.Year == command.Date.Year &&
+                                                        x.Date.Month == command.Date.Month &&
+                                                        x.Date.Day == command.Date.Day);
 
-            if(reys = null)
+            if (reys == null)
             {
                 throw new TrainNotFoundException();
             }
-            if(command.Status = Status.Econom)
+            if(command.Status == Status.Econom)
             {
                 foreach (var places in _context.placeTrains)
                 {
@@ -91,7 +91,7 @@ namespace Transport.Application.UseCase.User.Commands
                     continue;
                 }
             }
-            if(command.Status = Status.Buiseness)
+            if(command.Status == Status.Buiseness)
             {
                 foreach (var places in _context.placeTrains)
                 {
@@ -102,7 +102,7 @@ namespace Transport.Application.UseCase.User.Commands
                     continue;
                 }
             }
-            if (command.Status = Status.VIP)
+            if (command.Status == Status.VIP)
             {
                 foreach (var places in _context.placeTrains)
                 {
@@ -128,7 +128,7 @@ namespace Transport.Application.UseCase.User.Commands
             {
                 throw new Exception("Payment si valid");
             }
-            else if(command.Status = Status.Econom)
+            else if(command.Status == Status.Econom)
             {
                 if(_economyService.PaymentCheck(command.PasportSeries, (double)reys.Price))
                 {
@@ -144,10 +144,10 @@ namespace Transport.Application.UseCase.User.Commands
                 }
                 else
                 {
-                    throw new Exception("Invalid pasport or not enough money")
+                    throw new Exception("Invalid pasport or not enough money");
                 }
             }
-            else if (command.Status = Status.Buiseness)
+            else if (command.Status == Status.Buiseness)
             {
                 if (_economyService.PaymentCheck(command.PasportSeries, (double)reys.Price))
                 {
@@ -163,10 +163,10 @@ namespace Transport.Application.UseCase.User.Commands
                 }
                 else
                 {
-                    throw new Exception("Invalid pasport or not enough money")
+                    throw new Exception("Invalid pasport or not enough money");
                 }
             }
-            else if (command.Status = Status.VIP)
+            else if (command.Status == Status.VIP)
             {
                 if (_economyService.PaymentCheck(command.PasportSeries, (double)reys.Price))
                 {
@@ -182,7 +182,7 @@ namespace Transport.Application.UseCase.User.Commands
                 }
                 else
                 {
-                    throw new Exception("Invalid pasport or not enough money")
+                    throw new Exception("Invalid pasport or not enough money");
                 }
             }
 
