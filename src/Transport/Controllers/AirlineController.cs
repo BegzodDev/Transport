@@ -43,7 +43,7 @@ namespace Transport.Api.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> Update([FromForm] GetTicketQuery query)
+        public async Task<IActionResult> Update([FromForm] GetAirlineTicketQuery query)
         {
             var response = await _mediator.Send(query);
             return Ok(response);

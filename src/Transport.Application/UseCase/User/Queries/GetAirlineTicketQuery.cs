@@ -5,12 +5,12 @@ using Transport.Application.Exceptions;
 
 namespace Transport.Application.UseCase.User.Queries
 {
-    public class GetTicketQuery : IQuery<TicketAirlineViewModel>
+    public class GetAirlineTicketQuery : IQuery<TicketAirlineViewModel>
     {
         public string? PasportSeries { get; set; }
     }
 
-    public class GetTicketQueryHandelr : IQueryHandler<GetTicketQuery, TicketAirlineViewModel>
+    public class GetTicketQueryHandelr : IQueryHandler<GetAirlineTicketQuery, TicketAirlineViewModel>
     {
         private readonly IApplicationDbContext _context;
 
@@ -19,7 +19,7 @@ namespace Transport.Application.UseCase.User.Queries
             _context = context;
         }
 
-        public async Task<TicketAirlineViewModel> Handle(GetTicketQuery query, CancellationToken cancellationToken)
+        public async Task<TicketAirlineViewModel> Handle(GetAirlineTicketQuery query, CancellationToken cancellationToken)
         {
             var ticket = await _context.ticketAirlines.FirstOrDefaultAsync(x => x.PasportSeries == query.PasportSeries);
 

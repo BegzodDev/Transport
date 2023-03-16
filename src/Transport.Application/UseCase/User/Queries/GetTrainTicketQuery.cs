@@ -22,7 +22,7 @@ namespace Transport.Application.UseCase.User.Queries
 
         public GetTicketQueryHanler(IApplicationDbContext context)
         {
-            _context = context
+            _context = context;
         }
 
         public async Task<TrainTicketViewModel> Handle(GetTrainTicketQuery query, CancellationToken cancellationToken)
@@ -34,7 +34,10 @@ namespace Transport.Application.UseCase.User.Queries
                 throw new TrainNotFoundException();
             }
 
-            return (TrainTicketViewModel)ticket;
+            return new TrainTicketViewModel()
+            {
+
+            };
         }
     }
 }

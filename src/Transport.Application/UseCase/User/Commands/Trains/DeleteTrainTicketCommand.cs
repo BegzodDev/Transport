@@ -19,9 +19,8 @@ namespace Transport.Application.UseCase.User.Commands.Trains
     {
         private readonly IApplicationDbContext _context;
 
-        public DeleteTicketTrainCommandHandler(IApplicationDbContext context)
+        public DeleteTrainTicketCommandHandler(IApplicationDbContext context)
         {
-
             _context = context;
         }
 
