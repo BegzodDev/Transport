@@ -34,10 +34,7 @@ namespace Transport.Application.UseCase.User.Queries
                 throw new TrainNotFoundException();
             }
 
-            return new TrainTicketViewModel()
-            {
-
-            };
+            return (TrainTicketViewModel)ticket;
         }
     }
 }
