@@ -10,7 +10,6 @@ namespace Transport.Infrastructure.Services
             "AB1234561",
             "AB1234562"
         };
-
         public bool Check(string pasportSeries)
         {
             return Pasport_Series.Contains(pasportSeries) ? true : false;

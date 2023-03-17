@@ -18,7 +18,7 @@ namespace Transport.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost]
+        [HttpPost("AirLine")]
         [Authorize(Policy = "AdminActions")]
         public async Task<IActionResult> Create(CreateAirlineCommand command)
         {
@@ -27,7 +27,7 @@ namespace Transport.Api.Controllers
             return Ok();
         }
 
-        [HttpPut]
+        [HttpPut("AirLine")]
         [Authorize(Policy = "AdminActions")]
         public async Task<IActionResult> Update([FromForm] UpdateAirlineCommand command)
         {
@@ -36,7 +36,7 @@ namespace Transport.Api.Controllers
         }
 
 
-        [HttpDelete]
+        [HttpDelete("AirLine")]
         [Authorize(Policy = "AdminActions")]
         public async Task<IActionResult> Delete([FromForm] DeleteAirlineCommand command)
         {
@@ -52,7 +52,7 @@ namespace Transport.Api.Controllers
             return Ok(response);
         }
 
-        [HttpGet]
+        [HttpGet("AirLine")]
         [Authorize(Policy = "AdminActions")]
         public async Task<IActionResult> GetAll()
         {
@@ -107,7 +107,7 @@ namespace Transport.Api.Controllers
             await _mediator.Send(command);
             return Ok();
         }
-        [HttpDelete("Trains")]
+        [HttpDelete("Train")]
         [Authorize(Policy = "AdminActions")]
         public async Task<IActionResult> DeleteTrain([FromForm] DeleteTrainCommand command)
         {

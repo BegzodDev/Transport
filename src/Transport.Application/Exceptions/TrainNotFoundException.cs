@@ -7,7 +7,6 @@ namespace Transport.Application.Exceptions
         public TrainNotFoundException()
            : base(nameof(Bus))
         {
-            return;
         }
     }
 }
