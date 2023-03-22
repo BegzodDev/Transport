@@ -112,10 +112,23 @@ namespace Transport.Application.UseCase.User.Commands
             {
                 new PlaceAirline()
                 {
+
                     Status = command.Status,
                     Place_in_Ticket = command.Place,
                     AirlineId = reys.Id
                 };
+                    var ticket = new TicketAirline()
+                    {
+
+                        UserId = _currentUserService.UserId,
+                        PlaceAirlineId = place.Id,
+
+                        From = reys.Flight_From,
+                        For = reys.Flight_For,
+                        dateTime = reys.Date,
+                        PasportSeries = command.PasportSeies,
+                    };
+                    await _context.ticketAirlines.AddAsync(ticket);
 
                 try
                 {
@@ -124,6 +137,7 @@ namespace Transport.Application.UseCase.User.Commands
                     await _context.SaveChangesAsync(cancellationToken);
 
                     if (!_economyService.PaymentCheck(command.PasportSeies!, (double)reys.Price!))
+                    var ticket = new TicketAirline()
                     {
                         throw new Exception("Payment is valid");
                     }

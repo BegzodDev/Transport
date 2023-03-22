@@ -40,7 +40,6 @@ namespace Transport.Application.UseCase.Admin.Commands.Airlines
             await _context.SaveChangesAsync(cancellationToken);
 
             return entity.Id;
-
         }
     }
 }

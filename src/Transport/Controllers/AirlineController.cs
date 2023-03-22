@@ -19,7 +19,7 @@ namespace Transport.Api.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> Create([FromForm]CreateAirlineTickerCommand command)
+        public async Task<IActionResult> Create([FromForm] CreateAirlineTickerCommand command)
         {
             await _mediator.Send(command);
             return Ok();
@@ -43,7 +43,7 @@ namespace Transport.Api.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<IActionResult> Update([FromForm] GetTicketQuery query)
+        public async Task<IActionResult> Update([FromForm] GetAirlineTicketQuery query)
         {
             var response = await _mediator.Send(query);
             return Ok(response);

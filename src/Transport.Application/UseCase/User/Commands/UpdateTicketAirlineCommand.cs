@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Transport.Application.Abstractions;
 using Transport.Application.Exceptions;
+using Transport.Domain.Entities;
 
 namespace Transport.Application.UseCase.User.Commands
 {
@@ -27,6 +28,7 @@ namespace Transport.Application.UseCase.User.Commands
             {
                 throw new AirlineNotFoundException();
             }
+            
 
             ticket.dateTime = command.Date.ToDateTime(TimeOnly.MinValue);
 
