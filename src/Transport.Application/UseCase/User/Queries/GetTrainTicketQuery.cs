@@ -13,7 +13,7 @@ namespace Transport.Application.UseCase.User.Queries
 {
     public class GetTrainTicketQuery : IQuery<TrainTicketViewModel>
     {
-        public int UserId { get; set; }
+        public int Id { get; set; }
     }
 
     public class GetTicketQueryHanler : IQueryHandler<GetTrainTicketQuery, TrainTicketViewModel>
@@ -27,14 +27,22 @@ namespace Transport.Application.UseCase.User.Queries
 
         public async Task<TrainTicketViewModel> Handle(GetTrainTicketQuery query, CancellationToken cancellationToken)
         {
-            var ticket = _context.ticketTrains.FirstOrDefaultAsync(x => x.UserId == query.UserId);
+            var ticket = await _context.ticketTrains.FirstOrDefaultAsync(x => x.UserId == query.Id);
 
-            if(ticket == null)
+            if (ticket == null)
             {
                 throw new TrainNotFoundException();
             }
 
-            return (TrainTicketViewModel)ticket;
+            var tick = new TrainTicketViewModel()
+            {
+                dateTime = ticket.dateTime,
+                PassergerForTrainId = ticket.PassergerForTrainId,
+                UserId = ticket.UserId,
+                PlaceTrainId = ticket.PlaceTrainId
+            };
+
+            return tick;
         }
     }
 }

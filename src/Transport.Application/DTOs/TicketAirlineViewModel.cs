@@ -2,13 +2,14 @@
 
 namespace Transport.Application.DTOs
 {
-    public interface TicketAirlineViewModel
+    public class TicketAirlineViewModel
     {
-        public int? Id { get; set; }
+        public int Id { get; set; }
+        public DateTime dateTime { get; set; }
+        public int? PassergerForTrainId { get; set; }
 
-        public int Place { get; set; }
-        public Status Status { get; set; }
-
+        public int UserId { get; set; }
+        public int PlaceTrainId { get; set; }
         public ICollection<TicketAirlineViewModel> TicketAirline { get; set; }
     }
 }

@@ -7,8 +7,8 @@
         public int? PassergerForTrainId { get; set; }
 
 
-        public int? UserId { get; set; }
-        public int? PlaceTrainId { get; set; }
+        public int UserId { get; set; }
+        public int PlaceTrainId { get; set; }
         public User? User { get; set; }
         public PlaceTrain? PlaceTrains { get; set; }
     }

@@ -7,7 +7,7 @@ namespace Transport.Application.UseCase.User.Queries
 {
     public class GetAirlineTicketQuery : IQuery<TicketAirlineViewModel>
     {
-        public string? PasportSeries { get; set; }
+        public int Id { get; set; }
     }
 
     public class GetTicketQueryHandelr : IQueryHandler<GetAirlineTicketQuery, TicketAirlineViewModel>
@@ -21,13 +21,19 @@ namespace Transport.Application.UseCase.User.Queries
 
         public async Task<TicketAirlineViewModel> Handle(GetAirlineTicketQuery query, CancellationToken cancellationToken)
         {
-            var ticket = await _context.ticketAirlines.FirstOrDefaultAsync(x => x.PasportSeries == query.PasportSeries);
+            var ticket = await _context.ticketAirlines.FirstOrDefaultAsync(x => x.UserId == query.Id);
 
             if (ticket == null)
             {
                 throw new AirlineNotFoundException();
             }
-
+            var tick = new TicketAirlineViewModel()
+            {
+                dateTime = ticket.dateTime,
+                PassergerForTrainId = ticket.pas,
+                UserId = ticket.UserId,
+                PlaceTrainId = ticket.PlaceTrainId
+            }w
             return (TicketAirlineViewModel)ticket;
         }
     }
