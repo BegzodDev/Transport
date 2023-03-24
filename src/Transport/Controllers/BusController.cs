@@ -34,7 +34,7 @@ namespace Transport.Api.Controllers
             return Ok();
         }
         [HttpGet]
-        public async Task<IActionResult> Delete(GetBusTicketQuery query)
+        public async Task<IActionResult> Get(GetBusTicketQuery query)
         {
             await _mediator.Send(query);
             return Ok();

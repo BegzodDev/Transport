@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Transport.Application.DTOs;
 using Transport.Application.UseCase.Admin.Commands.Airlines;
 using Transport.Application.UseCase.Admin.Commands.Busses;
 using Transport.Application.UseCase.Admin.Commands.Trains;
@@ -17,16 +18,22 @@ namespace Transport.Api.Controllers
         {
             _mediator = mediator;
         }
-
         [HttpPost("AirLine")]
         [Authorize(Policy = "AdminActions")]
-        public async Task<IActionResult> Create(CreateAirlineCommand command)
+        public async Task<IActionResult> Create(AirLineViewModel viewModel)
         {
-            await _mediator.Send(command);
-
-            return Ok();
+            var response = await _mediator.Send(new CreateAirlineCommand()
+            {
+                Flight_From = viewModel.FlightFrom,
+                Flight_To = viewModel.FlightTo,
+                Price = viewModel.Price,
+                Date = viewModel.Date,
+                CountBusinessClassPlace = viewModel.CountBusinessClassPlace,
+                CountEconomyClassPlace = viewModel.CountEconomyClassPlace,
+                CountVIPClassPlace = viewModel.CountVIPClassPlace,
+            });
+            return Ok(response);
         }
-
         [HttpPut("AirLine")]
         [Authorize(Policy = "AdminActions")]
         public async Task<IActionResult> Update([FromForm] UpdateAirlineCommand command)
@@ -34,8 +41,6 @@ namespace Transport.Api.Controllers
             await _mediator.Send(command);
             return Ok();
         }
-
-
         [HttpDelete("AirLine")]
         [Authorize(Policy = "AdminActions")]
         public async Task<IActionResult> Delete([FromForm] DeleteAirlineCommand command)
@@ -43,7 +48,6 @@ namespace Transport.Api.Controllers
             await _mediator.Send(command);
             return Ok();
         }
-
         [HttpGet("Id")]
         [Authorize(Policy = "AdminActions")]
         public async Task<IActionResult> Get(int page)
@@ -97,7 +101,6 @@ namespace Transport.Api.Controllers
         public async Task<IActionResult> CreateTrain(CreateTrainCommand command)
         {
             await _mediator.Send(command);
-
             return Ok();
         }
         [HttpPut("Train")]
